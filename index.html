@@ -1451,11 +1451,6 @@ let wrongAnswers = 0;
 
 let answerLocked = false;
 
-
-/*
-   رقم خاص للتحكم في الأصوات.
-*/
-
 let speechSession = 0;
 
 
@@ -1490,6 +1485,7 @@ function shuffle(array) {
     }
 
     return result;
+
 }
 
 
@@ -1508,6 +1504,7 @@ function speakArabic(text) {
             resolve();
 
             return;
+
         }
 
 
@@ -1532,6 +1529,7 @@ function speakArabic(text) {
             resolve();
 
             return;
+
         }
 
 
@@ -1544,14 +1542,11 @@ function speakArabic(text) {
         utterance.lang =
             "ar-SA";
 
-
         utterance.rate =
             0.88;
 
-
         utterance.pitch =
             1;
-
 
         utterance.volume =
             1;
@@ -1631,7 +1626,6 @@ function speakArabic(text) {
         utterance.onend =
             done;
 
-
         utterance.onerror =
             done;
 
@@ -1667,7 +1661,6 @@ function stopSpeech() {
 
 /* =====================================================
    جملة النجاح
-   تبقى فقط: أحسنت
 ===================================================== */
 
 async function speakSuccess() {
@@ -1675,6 +1668,13 @@ async function speakSuccess() {
     await speakArabic(
         "أَحْسَنْتَ"
     );
+
+    /*
+       مهلة قصيرة حتى لا ينقطع آخر
+       صوت قبل الانتقال للسؤال التالي
+    */
+
+    await wait(200);
 
 }
 
@@ -1685,8 +1685,29 @@ async function speakSuccess() {
 
 async function speakError() {
 
+    /*
+       نطق كلمة خطأ لوحدها
+       حتى لا تتحول إلى نطق غير صحيح
+    */
+
     await speakArabic(
-        "خطأ، الإِجَابَةُ هِيَ"
+        "خَطَأ"
+    );
+
+
+    /*
+       فاصل 0.3 ثانية
+    */
+
+    await wait(300);
+
+
+    /*
+       نطق الجملة الثانية لوحدها
+    */
+
+    await speakArabic(
+        "الإِجَابَةُ هِيَ"
     );
 
 }
@@ -1709,7 +1730,6 @@ function getCorrectSpeech(
         return item.speechCapital;
 
     }
-
 
     return item.speechCountry;
 
@@ -1766,12 +1786,6 @@ function makeOptions(
 
     });
 
-
-    /*
-       3 إجابات خاطئة
-       + الإجابة الصحيحة
-       = 4 إجابات
-    */
 
     values =
         shuffle(values)
@@ -1990,6 +2004,7 @@ function showQuestion() {
         showResult();
 
         return;
+
     }
 
 
@@ -2050,10 +2065,8 @@ function showQuestion() {
     title.textContent =
         "";
 
-
     content.innerHTML =
         "";
-
 
     answers.innerHTML =
         "";
@@ -2347,7 +2360,7 @@ async function chooseAnswer(
 
 
         /*
-           ينطق فقط:
+           النطق:
            أحسنت
         */
 
@@ -2384,23 +2397,26 @@ async function chooseAnswer(
 
 
         /*
-           ينطق:
-           خَطَأ، الإِجَابَةُ هِيَ
+           النطق:
+           خَطَأ
+           ثم بعد 0.3 ثانية
+           الإِجَابَةُ هِيَ
         */
 
         await speakError();
 
 
         /*
-           انتظار ثانية واحدة فقط
+           انتظار ثانية كاملة
+           قبل نطق الإجابة الصحيحة
         */
 
         await wait(1000);
 
 
         /*
-           إذا ألغى المستخدم اللعبة
-           أثناء الانتظار نتوقف.
+           إذا أُلغيت اللعبة
+           نتوقف
         */
 
         if (
@@ -2476,12 +2492,20 @@ async function chooseAnswer(
 
 
         /*
-           نطق الإجابة الصحيحة بالتشكيل
+           نطق الإجابة الصحيحة
         */
 
         await speakArabic(
             correctSpeech
         );
+
+
+        /*
+           مهلة قصيرة جدًا بعد انتهاء الصوت
+           حتى لا ينقطع آخر حرف
+        */
+
+        await wait(200);
 
 
         /*
@@ -2569,6 +2593,7 @@ function createConfetti() {
                         * symbols.length
                     )
                 ];
+
 
             piece.style.width =
                 "auto";
