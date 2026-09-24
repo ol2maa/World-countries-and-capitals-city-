@@ -1552,6 +1552,7 @@ function shuffle(array) {
     }
 
     return result;
+
 }
 
 
@@ -1698,10 +1699,10 @@ function stopSpeech() {
    النجاح
 ===================================================== */
 
-async function speakSuccess() {
+async function speakSuccess(correctSpeech) {
 
     await speakArabic(
-        "أَحْسَنْتَ"
+        correctSpeech
     );
 
     await wait(250);
@@ -2394,7 +2395,7 @@ async function chooseAnswer(
         createConfetti();
 
 
-        await speakSuccess();
+        await speakSuccess(correctSpeech);
 
 
         if (
