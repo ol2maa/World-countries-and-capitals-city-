@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -15,7 +16,12 @@ content="yes">
 
 <title>مسابقة الدول والعواصم</title>
 
+
 <style>
+
+/* =====================================================
+   الأساس
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -24,6 +30,7 @@ content="yes">
 }
 
 body {
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -40,46 +47,75 @@ body {
         );
 
     min-height: 100vh;
+
     color: white;
+
     padding: 15px;
+
+    overflow-x: hidden;
 }
 
 .container {
+
     width: 100%;
+
     max-width: 650px;
+
     margin: auto;
 }
 
+
+/* =====================================================
+   العنوان
+===================================================== */
+
 h1 {
+
     text-align: center;
+
     font-size: 28px;
-    margin: 10px 0 20px;
+
+    margin:
+        10px 0 18px;
 }
 
 .subtitle {
+
     text-align: center;
+
     color: #cbd5e1;
+
     margin-bottom: 20px;
-    font-size: 15px;
+
+    font-size: 16px;
 }
 
-/* =========================
+
+/* =====================================================
    القائمة
-========================= */
+===================================================== */
 
 .menu {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 12px;
 }
 
 .mode-button {
+
     width: 100%;
+
     border: none;
+
     border-radius: 18px;
+
     padding: 18px 15px;
 
     font-size: 18px;
+
     font-weight: bold;
 
     color: white;
@@ -92,7 +128,8 @@ h1 {
         );
 
     box-shadow:
-        0 6px 15px rgba(0,0,0,.25);
+        0 6px 15px
+        rgba(0,0,0,.25);
 
     cursor: pointer;
 
@@ -102,41 +139,73 @@ h1 {
 }
 
 .mode-button:active {
+
     transform: scale(.97);
+
     opacity: .85;
 }
 
-/* =========================
+
+/* =====================================================
    اللعبة
-========================= */
+===================================================== */
 
 .game {
+
     display: none;
 }
 
+
+/* =====================================================
+   الشريط العلوي
+===================================================== */
+
 .top-bar {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
-    background: rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.08);
 
-    border-radius: 15px;
+    border-radius: 16px;
 
-    padding: 12px 15px;
+    padding:
+        12px 15px;
 
     margin-bottom: 15px;
 }
 
 .question-number {
+
     font-size: 16px;
+
     font-weight: bold;
 }
 
+.question-number span {
+
+    direction: ltr;
+
+    unicode-bidi: isolate;
+
+    display: inline-block;
+}
+
 .score {
+
     font-size: 16px;
+
     font-weight: bold;
 }
+
+
+/* =====================================================
+   صندوق السؤال
+===================================================== */
 
 .question-box {
 
@@ -145,7 +214,8 @@ h1 {
 
     border-radius: 22px;
 
-    padding: 25px 15px;
+    padding:
+        25px 15px;
 
     text-align: center;
 
@@ -154,17 +224,22 @@ h1 {
     min-height: 180px;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.20);
+        0 8px 25px
+        rgba(0,0,0,.20);
 }
 
 .question-title {
+
     font-size: 23px;
+
     font-weight: bold;
 
     margin-bottom: 18px;
@@ -173,18 +248,37 @@ h1 {
 }
 
 .flag {
+
     font-size: 75px;
+
     line-height: 1.2;
 
-    margin: 5px 0 10px;
+    margin:
+        5px 0 10px;
 }
 
-.capital {
-    font-size: 27px;
+.question-country {
+
+    font-size: 30px;
+
     font-weight: bold;
 
     color: #facc15;
 }
+
+.question-capital {
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    color: #facc15;
+}
+
+
+/* =====================================================
+   الاختيارات
+===================================================== */
 
 .answers {
 
@@ -204,7 +298,7 @@ h1 {
 
     border-radius: 18px;
 
-    min-height: 70px;
+    min-height: 75px;
 
     padding: 12px;
 
@@ -225,7 +319,15 @@ h1 {
 }
 
 .answer:active {
+
     transform: scale(.96);
+}
+
+.answer.flag-answer {
+
+    font-size: 48px;
+
+    line-height: 1;
 }
 
 .answer.correct {
@@ -243,16 +345,18 @@ h1 {
 }
 
 .answer.disabled {
+
     pointer-events: none;
 }
 
-/* =========================
+
+/* =====================================================
    التصحيح
-========================= */
+===================================================== */
 
 .correction {
 
-    min-height: 55px;
+    min-height: 75px;
 
     text-align: center;
 
@@ -262,24 +366,34 @@ h1 {
 
     font-weight: bold;
 
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
 .correct-message {
+
     color: #4ade80;
+
+    font-size: 20px;
 }
 
 .wrong-message {
+
     color: #f87171;
+
+    font-size: 20px;
 }
 
 .correct-answer {
+
     color: #facc15;
+
+    margin-top: 5px;
 }
 
-/* =========================
+
+/* =====================================================
    أزرار التحكم
-========================= */
+===================================================== */
 
 .controls {
 
@@ -303,7 +417,7 @@ h1 {
 
     padding: 14px 10px;
 
-    font-size: 16px;
+    font-size: 17px;
 
     font-weight: bold;
 
@@ -313,21 +427,21 @@ h1 {
         rgba(255,255,255,.12);
 
     border:
-        1px solid rgba(255,255,255,.15);
+        1px solid
+        rgba(255,255,255,.15);
 
     cursor: pointer;
-
-    transition:
-        transform .15s;
 }
 
 .control-button:active {
+
     transform: scale(.96);
 }
 
-/* =========================
-   صفحة النتيجة
-========================= */
+
+/* =====================================================
+   النتيجة
+===================================================== */
 
 .result {
 
@@ -340,19 +454,22 @@ h1 {
 
     border-radius: 25px;
 
-    padding: 30px 20px;
+    padding:
+        30px 20px;
 
     margin-top: 20px;
 }
 
 .result h2 {
+
     font-size: 28px;
+
     margin-bottom: 20px;
 }
 
 .result-score {
 
-    font-size: 50px;
+    font-size: 52px;
 
     font-weight: bold;
 
@@ -368,6 +485,8 @@ h1 {
     font-weight: bold;
 
     margin-bottom: 25px;
+
+    line-height: 1.8;
 }
 
 .result-buttons {
@@ -403,130 +522,244 @@ h1 {
     cursor: pointer;
 }
 
-/* =========================
+
+/* =====================================================
+   المفرقعات
+===================================================== */
+
+.confetti {
+
+    position: fixed;
+
+    top: -20px;
+
+    width: 9px;
+
+    height: 14px;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    animation:
+        confettiFall
+        1.4s
+        linear
+        forwards;
+}
+
+@keyframes confettiFall {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateY(105vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
    الجوال
-========================= */
+===================================================== */
 
 @media (max-width: 500px) {
 
     h1 {
-        font-size: 24px;
+
+        font-size: 25px;
+    }
+
+    .subtitle {
+
+        font-size: 15px;
     }
 
     .question-title {
-        font-size: 20px;
+
+        font-size: 21px;
     }
 
     .flag {
-        font-size: 65px;
+
+        font-size: 68px;
     }
 
-    .capital {
-        font-size: 24px;
+    .question-country {
+
+        font-size: 28px;
+    }
+
+    .question-capital {
+
+        font-size: 25px;
     }
 
     .answer {
+
         font-size: 16px;
-        min-height: 65px;
+
+        min-height: 70px;
+    }
+
+    .answer.flag-answer {
+
+        font-size: 45px;
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="container">
 
-<h1>🌍 مسابقة الدول والعواصم</h1>
+
+<h1>
+🌍 مسابقة الدول والعواصم
+</h1>
+
 
 <div class="subtitle">
+
 اختبر معلوماتك عن الدول والأعلام والعواصم
+
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      القائمة الرئيسية
-========================= -->
+===================================================== -->
 
 <div id="menu" class="menu">
 
-<button class="mode-button"
+
+<button
+class="mode-button"
 onclick="startMode('all')">
+
 🌍 الجميع — 80 سؤال
+
 </button>
 
-<button class="mode-button"
+
+<button
+class="mode-button"
 onclick="startMode('flagToCountry')">
+
 🏳️ العلم → الدولة
+
 </button>
 
-<button class="mode-button"
+
+<button
+class="mode-button"
 onclick="startMode('countryToFlag')">
+
 🌍 الدولة → العلم
+
 </button>
 
-<button class="mode-button"
+
+<button
+class="mode-button"
 onclick="startMode('countryToCapital')">
+
 🏛️ الدولة → العاصمة
+
 </button>
 
-<button class="mode-button"
+
+<button
+class="mode-button"
 onclick="startMode('capitalToCountry')">
+
 🏛️ العاصمة → الدولة
+
 </button>
+
 
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      اللعبة
-========================= -->
+===================================================== -->
 
 <div id="game" class="game">
 
+
 <div class="top-bar">
 
-<div id="questionNumber"
+
+<div
+id="questionNumber"
 class="question-number">
-السؤال 1 / 20
+
+السؤال
+<span>1 / 20</span>
+
 </div>
 
-<div id="score"
+
+<div
+id="score"
 class="score">
+
 النقاط: 0
+
 </div>
+
 
 </div>
 
 
 <div class="question-box">
 
-<div id="questionTitle"
+
+<div
+id="questionTitle"
 class="question-title">
 </div>
+
 
 <div id="questionContent">
 </div>
 
+
 </div>
 
 
-<div id="answers"
+<div
+id="answers"
 class="answers">
 </div>
 
 
-<div id="correction"
+<div
+id="correction"
 class="correction">
 </div>
 
 
-<!-- أزرار التحكم تظهر تحت كل سؤال -->
-
 <div class="controls">
+
 
 <button
 class="control-button"
@@ -536,6 +769,7 @@ onclick="goToMenu()">
 
 </button>
 
+
 <button
 class="control-button"
 onclick="restartGame()">
@@ -544,28 +778,41 @@ onclick="restartGame()">
 
 </button>
 
-</div>
 
 </div>
 
 
-<!-- =========================
+</div>
+
+
+<!-- =====================================================
      النتيجة
-========================= -->
+===================================================== -->
 
-<div id="result" class="result">
+<div
+id="result"
+class="result">
 
-<h2>🎉 انتهت المسابقة</h2>
 
-<div id="resultScore"
+<h2>
+🎉 انتهت المسابقة
+</h2>
+
+
+<div
+id="resultScore"
 class="result-score">
 </div>
 
-<div id="resultText"
+
+<div
+id="resultText"
 class="result-text">
 </div>
 
+
 <div class="result-buttons">
+
 
 <button
 class="result-button"
@@ -575,6 +822,7 @@ onclick="goToMenu()">
 
 </button>
 
+
 <button
 class="result-button"
 onclick="restartGame()">
@@ -583,669 +831,692 @@ onclick="restartGame()">
 
 </button>
 
-</div>
 
 </div>
+
+
+</div>
+
 
 </div>
 
 
 <script>
 
+
 /* =====================================================
    بيانات الدول
 
-   speechCountry و speechCapital
-   تستخدم للنطق فقط.
+   speechCountry / speechCapital
+   للنطق فقط.
 
-   النص الظاهر يبقى بدون تشكيل.
+   النص الظاهر بدون تشكيل.
 ===================================================== */
 
 const countries = [
 
-{
-country:"السعودية",
-speechCountry:"السُّعُودِيَّة",
-capital:"الرياض",
-speechCapital:"الرِّيَاض",
-flag:"🇸🇦"
-},
 
 {
-country:"مصر",
-speechCountry:"مِصْر",
-capital:"القاهرة",
-speechCapital:"القَاهِرَة",
-flag:"🇪🇬"
+country: "السعودية",
+speechCountry: "السُّعُودِيَّة",
+capital: "الرياض",
+speechCapital: "الرِّيَاض",
+flag: "🇸🇦"
 },
 
-{
-country:"الإمارات",
-speechCountry:"الإِمَارَات",
-capital:"أبو ظبي",
-speechCapital:"أَبُو ظَبِي",
-flag:"🇦🇪"
-},
 
 {
-country:"الكويت",
-speechCountry:"الكُوَيْت",
-capital:"مدينة الكويت",
-speechCapital:"مَدِينَةُ الكُوَيْت",
-flag:"🇰🇼"
+country: "مصر",
+speechCountry: "مِصْر",
+capital: "القاهرة",
+speechCapital: "القَاهِرَة",
+flag: "🇪🇬"
 },
 
-{
-country:"قطر",
-speechCountry:"قَطَر",
-capital:"الدوحة",
-speechCapital:"الدَّوْحَة",
-flag:"🇶🇦"
-},
 
 {
-country:"البحرين",
-speechCountry:"البَحْرَيْن",
-capital:"المنامة",
-speechCapital:"المَنَامَة",
-flag:"🇧🇭"
+country: "الإمارات",
+speechCountry: "الإِمَارَات",
+capital: "أبو ظبي",
+speechCapital: "أَبُو ظَبِي",
+flag: "🇦🇪"
 },
 
-{
-country:"عُمان",
-speechCountry:"عُمَان",
-capital:"مسقط",
-speechCapital:"مَسْقَط",
-flag:"🇴🇲"
-},
 
 {
-country:"اليمن",
-speechCountry:"اليَمَن",
-capital:"صنعاء",
-speechCapital:"صَنْعَاء",
-flag:"🇾🇪"
+country: "الكويت",
+speechCountry: "الكُوَيْت",
+capital: "مدينة الكويت",
+speechCapital: "مَدِينَةُ الكُوَيْت",
+flag: "🇰🇼"
 },
 
-{
-country:"العراق",
-speechCountry:"العِرَاق",
-capital:"بغداد",
-speechCapital:"بَغْدَاد",
-flag:"🇮🇶"
-},
 
 {
-country:"الأردن",
-speechCountry:"الأُرْدُن",
-capital:"عمّان",
-speechCapital:"عَمَّان",
-flag:"🇯🇴"
+country: "قطر",
+speechCountry: "قَطَر",
+capital: "الدوحة",
+speechCapital: "الدَّوْحَة",
+flag: "🇶🇦"
 },
+
 
 {
-country:"سوريا",
-speechCountry:"سُورِيَا",
-capital:"دمشق",
-speechCapital:"دِمَشْق",
-flag:"🇸🇾"
+country: "البحرين",
+speechCountry: "البَحْرَيْن",
+capital: "المنامة",
+speechCapital: "المَنَامَة",
+flag: "🇧🇭"
 },
 
+
 {
-country:"لبنان",
-speechCountry:"لُبْنَان",
-capital:"بيروت",
-speechCapital:"بَيْرُوت",
-flag:"🇱🇧"
+country: "عُمان",
+speechCountry: "عُمَان",
+capital: "مسقط",
+speechCapital: "مَسْقَط",
+flag: "🇴🇲"
 },
 
+
 {
-country:"فلسطين",
-speechCountry:"فِلَسْطِين",
-capital:"القدس",
-speechCapital:"القُدْس",
-flag:"🇵🇸"
+country: "اليمن",
+speechCountry: "اليَمَن",
+capital: "صنعاء",
+speechCapital: "صَنْعَاء",
+flag: "🇾🇪"
 },
+
 
 {
-country:"المغرب",
-speechCountry:"المَغْرِب",
-capital:"الرباط",
-speechCapital:"الرِّبَاط",
-flag:"🇲🇦"
+country: "العراق",
+speechCountry: "العِرَاق",
+capital: "بغداد",
+speechCapital: "بَغْدَاد",
+flag: "🇮🇶"
 },
 
+
 {
-country:"الجزائر",
-speechCountry:"الجَزَائِر",
-capital:"الجزائر",
-speechCapital:"الجَزَائِر",
-flag:"🇩🇿"
+country: "الأردن",
+speechCountry: "الأُرْدُن",
+capital: "عمّان",
+speechCapital: "عَمَّان",
+flag: "🇯🇴"
 },
+
 
 {
-country:"تونس",
-speechCountry:"تُونِس",
-capital:"تونس",
-speechCapital:"تُونِس",
-flag:"🇹🇳"
+country: "سوريا",
+speechCountry: "سُورِيَا",
+capital: "دمشق",
+speechCapital: "دِمَشْق",
+flag: "🇸🇾"
 },
 
+
 {
-country:"ليبيا",
-speechCountry:"لِيبْيَا",
-capital:"طرابلس",
-speechCapital:"طَرَابُلُس",
-flag:"🇱🇾"
+country: "لبنان",
+speechCountry: "لُبْنَان",
+capital: "بيروت",
+speechCapital: "بَيْرُوت",
+flag: "🇱🇧"
 },
 
+
 {
-country:"السودان",
-speechCountry:"السُّودَان",
-capital:"الخرطوم",
-speechCapital:"الخَرْطُوم",
-flag:"🇸🇩"
+country: "فلسطين",
+speechCountry: "فِلَسْطِين",
+capital: "القدس",
+speechCapital: "القُدْس",
+flag: "🇵🇸"
 },
+
 
 {
-country:"موريتانيا",
-speechCountry:"مُورِيتَانْيَا",
-capital:"نواكشوط",
-speechCapital:"نَوَاكْشُوط",
-flag:"🇲🇷"
+country: "المغرب",
+speechCountry: "المَغْرِب",
+capital: "الرباط",
+speechCapital: "الرِّبَاط",
+flag: "🇲🇦"
 },
 
+
 {
-country:"الصومال",
-speechCountry:"الصُّومَال",
-capital:"مقديشو",
-speechCapital:"مَقْدِيشُو",
-flag:"🇸🇴"
+country: "الجزائر",
+speechCountry: "الجَزَائِر",
+capital: "الجزائر",
+speechCapital: "الجَزَائِر",
+flag: "🇩🇿"
 },
+
 
 {
-country:"جيبوتي",
-speechCountry:"جِيبُوتِي",
-capital:"جيبوتي",
-speechCapital:"جِيبُوتِي",
-flag:"🇩🇯"
+country: "تونس",
+speechCountry: "تُونِس",
+capital: "تونس",
+speechCapital: "تُونِس",
+flag: "🇹🇳"
 },
 
+
 {
-country:"تركيا",
-speechCountry:"تُرْكِيَا",
-capital:"أنقرة",
-speechCapital:"أَنْقَرَة",
-flag:"🇹🇷"
+country: "ليبيا",
+speechCountry: "لِيبْيَا",
+capital: "طرابلس",
+speechCapital: "طَرَابُلُس",
+flag: "🇱🇾"
 },
+
 
 {
-country:"إيران",
-speechCountry:"إِيرَان",
-capital:"طهران",
-speechCapital:"طَهْرَان",
-flag:"🇮🇷"
+country: "السودان",
+speechCountry: "السُّودَان",
+capital: "الخرطوم",
+speechCapital: "الخَرْطُوم",
+flag: "🇸🇩"
 },
 
+
 {
-country:"باكستان",
-speechCountry:"بَاكِسْتَان",
-capital:"إسلام آباد",
-speechCapital:"إِسْلَامْ آبَاد",
-flag:"🇵🇰"
+country: "الصومال",
+speechCountry: "الصُّومَال",
+capital: "مقديشو",
+speechCapital: "مَقْدِيشُو",
+flag: "🇸🇴"
 },
+
 
 {
-country:"الهند",
-speechCountry:"الهِنْد",
-capital:"نيودلهي",
-speechCapital:"نِيُودِلْهِي",
-flag:"🇮🇳"
+country: "تركيا",
+speechCountry: "تُرْكِيَا",
+capital: "أنقرة",
+speechCapital: "أَنْقَرَة",
+flag: "🇹🇷"
 },
 
+
 {
-country:"الصين",
-speechCountry:"الصِّين",
-capital:"بكين",
-speechCapital:"بَكِين",
-flag:"🇨🇳"
+country: "إيران",
+speechCountry: "إِيرَان",
+capital: "طهران",
+speechCapital: "طَهْرَان",
+flag: "🇮🇷"
 },
 
+
 {
-country:"اليابان",
-speechCountry:"اليَابَان",
-capital:"طوكيو",
-speechCapital:"طُوكْيُو",
-flag:"🇯🇵"
+country: "باكستان",
+speechCountry: "بَاكِسْتَان",
+capital: "إسلام آباد",
+speechCapital: "إِسْلَامْ آبَاد",
+flag: "🇵🇰"
 },
+
 
 {
-country:"كوريا الجنوبية",
-speechCountry:"كُورِيَا الجَنُوبِيَّة",
-capital:"سيول",
-speechCapital:"سِيُول",
-flag:"🇰🇷"
+country: "الهند",
+speechCountry: "الهِنْد",
+capital: "نيودلهي",
+speechCapital: "نِيُودِلْهِي",
+flag: "🇮🇳"
 },
 
+
 {
-country:"إندونيسيا",
-speechCountry:"إِنْدُونِيسِيَا",
-capital:"جاكرتا",
-speechCapital:"جَاكَرْتَا",
-flag:"🇮🇩"
+country: "الصين",
+speechCountry: "الصِّين",
+capital: "بكين",
+speechCapital: "بَكِين",
+flag: "🇨🇳"
 },
+
 
 {
-country:"ماليزيا",
-speechCountry:"مَالِيزْيَا",
-capital:"كوالالمبور",
-speechCapital:"كُوَالَالَمْبُور",
-flag:"🇲🇾"
+country: "اليابان",
+speechCountry: "اليَابَان",
+capital: "طُوكْيُو",
+speechCapital: "طُوكْيُو",
+flag: "🇯🇵"
 },
 
+
 {
-country:"تايلاند",
-speechCountry:"تَايْلَانْد",
-capital:"بانكوك",
-speechCapital:"بَانْكُوك",
-flag:"🇹🇭"
+country: "كوريا الجنوبية",
+speechCountry: "كُورِيَا الجَنُوبِيَّة",
+capital: "سيول",
+speechCapital: "سِيُول",
+flag: "🇰🇷"
 },
 
+
 {
-country:"روسيا",
-speechCountry:"رُوسِيَا",
-capital:"موسكو",
-speechCapital:"مُوسْكُو",
-flag:"🇷🇺"
+country: "إندونيسيا",
+speechCountry: "إِنْدُونِيسِيَا",
+capital: "جاكرتا",
+speechCapital: "جَاكَرْتَا",
+flag: "🇮🇩"
 },
+
 
 {
-country:"أوكرانيا",
-speechCountry:"أُوكْرَانْيَا",
-capital:"كييف",
-speechCapital:"كِيِيف",
-flag:"🇺🇦"
+country: "ماليزيا",
+speechCountry: "مَالِيزْيَا",
+capital: "كوالالمبور",
+speechCapital: "كُوَالَالَمْبُور",
+flag: "🇲🇾"
 },
 
+
 {
-country:"ألمانيا",
-speechCountry:"أَلْمَانْيَا",
-capital:"برلين",
-speechCapital:"بَرْلِين",
-flag:"🇩🇪"
+country: "تايلاند",
+speechCountry: "تَايْلَانْد",
+capital: "بانكوك",
+speechCapital: "بَانْكُوك",
+flag: "🇹🇭"
 },
+
 
 {
-country:"فرنسا",
-speechCountry:"فَرَنْسَا",
-capital:"باريس",
-speechCapital:"بَارِيس",
-flag:"🇫🇷"
+country: "روسيا",
+speechCountry: "رُوسِيَا",
+capital: "موسكو",
+speechCapital: "مُوسْكُو",
+flag: "🇷🇺"
 },
 
+
 {
-country:"إيطاليا",
-speechCountry:"إِيطَالْيَا",
-capital:"روما",
-speechCapital:"رُومَا",
-flag:"🇮🇹"
+country: "أوكرانيا",
+speechCountry: "أُوكْرَانْيَا",
+capital: "كييف",
+speechCapital: "كِيِيف",
+flag: "🇺🇦"
 },
 
+
 {
-country:"إسبانيا",
-speechCountry:"إِسْبَانْيَا",
-capital:"مدريد",
-speechCapital:"مَدْرِيد",
-flag:"🇪🇸"
+country: "ألمانيا",
+speechCountry: "أَلْمَانْيَا",
+capital: "برلين",
+speechCapital: "بَرْلِين",
+flag: "🇩🇪"
 },
+
 
 {
-country:"البرتغال",
-speechCountry:"البُرْتُغَال",
-capital:"لشبونة",
-speechCapital:"لِشْبُونَة",
-flag:"🇵🇹"
+country: "فرنسا",
+speechCountry: "فَرَنْسَا",
+capital: "باريس",
+speechCapital: "بَارِيس",
+flag: "🇫🇷"
 },
 
+
 {
-country:"بريطانيا",
-speechCountry:"بَرِيطَانْيَا",
-capital:"لندن",
-speechCapital:"لَنْدَن",
-flag:"🇬🇧"
+country: "إيطاليا",
+speechCountry: "إِيطَالْيَا",
+capital: "روما",
+speechCapital: "رُومَا",
+flag: "🇮🇹"
 },
+
 
 {
-country:"هولندا",
-speechCountry:"هُولَنْدَا",
-capital:"أمستردام",
-speechCapital:"أَمْسْتَرْدَام",
-flag:"🇳🇱"
+country: "إسبانيا",
+speechCountry: "إِسْبَانْيَا",
+capital: "مدريد",
+speechCapital: "مَدْرِيد",
+flag: "🇪🇸"
 },
 
+
 {
-country:"بلجيكا",
-speechCountry:"بَلْجِيكَا",
-capital:"بروكسل",
-speechCapital:"بْرُوكْسِل",
-flag:"🇧🇪"
+country: "البرتغال",
+speechCountry: "البُرْتُغَال",
+capital: "لشبونة",
+speechCapital: "لِشْبُونَة",
+flag: "🇵🇹"
 },
+
 
 {
-country:"سويسرا",
-speechCountry:"سُوَيْسْرَا",
-capital:"برن",
-speechCapital:"بِيرْن",
-flag:"🇨🇭"
+country: "بريطانيا",
+speechCountry: "بَرِيطَانْيَا",
+capital: "لندن",
+speechCapital: "لَنْدَن",
+flag: "🇬🇧"
 },
 
+
 {
-country:"النمسا",
-speechCountry:"النِّمْسَا",
-capital:"فيينا",
-speechCapital:"فِيِينَا",
-flag:"🇦🇹"
+country: "هولندا",
+speechCountry: "هُولَنْدَا",
+capital: "أمستردام",
+speechCapital: "أَمْسْتَرْدَام",
+flag: "🇳🇱"
 },
+
 
 {
-country:"اليونان",
-speechCountry:"اليُونَان",
-capital:"أثينا",
-speechCapital:"أَثِينَا",
-flag:"🇬🇷"
+country: "بلجيكا",
+speechCountry: "بَلْجِيكَا",
+capital: "بروكسل",
+speechCapital: "بْرُوكْسِل",
+flag: "🇧🇪"
 },
 
+
 {
-country:"السويد",
-speechCountry:"السُّوَيْد",
-capital:"ستوكهولم",
-speechCapital:"سْتُوكْهُولْم",
-flag:"🇸🇪"
+country: "سويسرا",
+speechCountry: "سُوَيْسْرَا",
+capital: "برن",
+speechCapital: "بِيرْن",
+flag: "🇨🇭"
 },
 
+
 {
-country:"النرويج",
-speechCountry:"النُّرْوِيج",
-capital:"أوسلو",
-speechCapital:"أُوسْلُو",
-flag:"🇳🇴"
+country: "النمسا",
+speechCountry: "النِّمْسَا",
+capital: "فيينا",
+speechCapital: "فِيِينَا",
+flag: "🇦🇹"
 },
+
 
 {
-country:"الدنمارك",
-speechCountry:"الدِّنْمَارِك",
-capital:"كوبنهاغن",
-speechCapital:"كُوبِنْهَاغِن",
-flag:"🇩🇰"
+country: "اليونان",
+speechCountry: "اليُونَان",
+capital: "أثينا",
+speechCapital: "أَثِينَا",
+flag: "🇬🇷"
 },
 
+
 {
-country:"فنلندا",
-speechCountry:"فِنْلَنْدَا",
-capital:"هلسنكي",
-speechCapital:"هِلْسِنْكِي",
-flag:"🇫🇮"
+country: "السويد",
+speechCountry: "السُّوَيْد",
+capital: "ستوكهولم",
+speechCapital: "سْتُوكْهُولْم",
+flag: "🇸🇪"
 },
+
 
 {
-country:"أيرلندا",
-speechCountry:"أَيْرْلَنْدَا",
-capital:"دبلن",
-speechCapital:"دَبْلِن",
-flag:"🇮🇪"
+country: "النرويج",
+speechCountry: "النُّرْوِيج",
+capital: "أوسلو",
+speechCapital: "أُوسْلُو",
+flag: "🇳🇴"
 },
 
+
 {
-country:"بولندا",
-speechCountry:"بُولَنْدَا",
-capital:"وارسو",
-speechCapital:"وَارْسُو",
-flag:"🇵🇱"
+country: "الدنمارك",
+speechCountry: "الدِّنْمَارِك",
+capital: "كوبنهاغن",
+speechCapital: "كُوبِنْهَاغِن",
+flag: "🇩🇰"
 },
 
+
 {
-country:"رومانيا",
-speechCountry:"رُومَانْيَا",
-capital:"بوخارست",
-speechCapital:"بُوخَارِسْت",
-flag:"🇷🇴"
+country: "فنلندا",
+speechCountry: "فِنْلَنْدَا",
+capital: "هلسنكي",
+speechCapital: "هِلْسِنْكِي",
+flag: "🇫🇮"
 },
+
 
 {
-country:"التشيك",
-speechCountry:"التِّشِيك",
-capital:"براغ",
-speechCapital:"بْرَاغ",
-flag:"🇨🇿"
+country: "أيرلندا",
+speechCountry: "أَيْرْلَنْدَا",
+capital: "دبلن",
+speechCapital: "دَبْلِن",
+flag: "🇮🇪"
 },
 
+
 {
-country:"المجر",
-speechCountry:"المَجَر",
-capital:"بودابست",
-speechCapital:"بُودَابِسْت",
-flag:"🇭🇺"
+country: "بولندا",
+speechCountry: "بُولَنْدَا",
+capital: "وارسو",
+speechCapital: "وَارْسُو",
+flag: "🇵🇱"
 },
+
 
 {
-country:"أستراليا",
-speechCountry:"أَسْتْرَالْيَا",
-capital:"كانبيرا",
-speechCapital:"كَانْبِرَا",
-flag:"🇦🇺"
+country: "رومانيا",
+speechCountry: "رُومَانْيَا",
+capital: "بوخارست",
+speechCapital: "بُوخَارِسْت",
+flag: "🇷🇴"
 },
 
+
 {
-country:"نيوزيلندا",
-speechCountry:"نِيُوزِيلَنْدَا",
-capital:"ويلينغتون",
-speechCapital:"وِلِنْغْتُون",
-flag:"🇳🇿"
+country: "التشيك",
+speechCountry: "التِّشِيك",
+capital: "براغ",
+speechCapital: "بْرَاغ",
+flag: "🇨🇿"
 },
 
+
 {
-country:"كندا",
-speechCountry:"كَنَدَا",
-capital:"أوتاوا",
-speechCapital:"أُوتَاوَا",
-flag:"🇨🇦"
+country: "المجر",
+speechCountry: "المَجَر",
+capital: "بودابست",
+speechCapital: "بُودَابِسْت",
+flag: "🇭🇺"
 },
+
 
 {
-country:"الولايات المتحدة",
-speechCountry:"الوِلَايَاتُ المُتَّحِدَة",
-capital:"واشنطن",
-speechCapital:"وَاشِنْطُن",
-flag:"🇺🇸"
+country: "أستراليا",
+speechCountry: "أَسْتْرَالْيَا",
+capital: "كانبيرا",
+speechCapital: "كَانْبِرَا",
+flag: "🇦🇺"
 },
 
+
 {
-country:"المكسيك",
-speechCountry:"المَكْسِيك",
-capital:"مكسيكو سيتي",
-speechCapital:"مَكْسِيكُو سِيتِي",
-flag:"🇲🇽"
+country: "نيوزيلندا",
+speechCountry: "نِيُوزِيلَنْدَا",
+capital: "ويلينغتون",
+speechCapital: "وِلِنْغْتُون",
+flag: "🇳🇿"
 },
+
 
 {
-country:"البرازيل",
-speechCountry:"البَرَازِيل",
-capital:"برازيليا",
-speechCapital:"بْرَازِيلْيَا",
-flag:"🇧🇷"
+country: "كندا",
+speechCountry: "كَنَدَا",
+capital: "أوتاوا",
+speechCapital: "أُوتَاوَا",
+flag: "🇨🇦"
 },
 
+
 {
-country:"الأرجنتين",
-speechCountry:"الأَرْجَنْتِين",
-capital:"بوينس آيرس",
-speechCapital:"بُوَيْنُس آَيْرِس",
-flag:"🇦🇷"
+country: "الولايات المتحدة",
+speechCountry: "الوِلَايَاتُ المُتَّحِدَة",
+capital: "واشنطن",
+speechCapital: "وَاشِنْطُن",
+flag: "🇺🇸"
 },
 
+
 {
-country:"تشيلي",
-speechCountry:"تْشِيلِي",
-capital:"سانتياغو",
-speechCapital:"سَانْتِيَاغُو",
-flag:"🇨🇱"
+country: "المكسيك",
+speechCountry: "المَكْسِيك",
+capital: "مكسيكو سيتي",
+speechCapital: "مَكْسِيكُو سِيتِي",
+flag: "🇲🇽"
 },
+
 
 {
-country:"كولومبيا",
-speechCountry:"كُولُومْبِيَا",
-capital:"بوغوتا",
-speechCapital:"بُوغُوتَا",
-flag:"🇨🇴"
+country: "البرازيل",
+speechCountry: "البَرَازِيل",
+capital: "برازيليا",
+speechCapital: "بْرَازِيلْيَا",
+flag: "🇧🇷"
 },
 
+
 {
-country:"بيرو",
-speechCountry:"بِيرُو",
-capital:"ليما",
-speechCapital:"لِيمَا",
-flag:"🇵🇪"
+country: "الأرجنتين",
+speechCountry: "الأَرْجَنْتِين",
+capital: "بوينس آيرس",
+speechCapital: "بُوَيْنُس آَيْرِس",
+flag: "🇦🇷"
 },
+
 
 {
-country:"جنوب أفريقيا",
-speechCountry:"جَنُوبُ أَفْرِيقِيَا",
-capital:"بريتوريا",
-speechCapital:"بْرِيتُورِيَا",
-flag:"🇿🇦"
+country: "تشيلي",
+speechCountry: "تْشِيلِي",
+capital: "سانتياغو",
+speechCapital: "سَانْتِيَاغُو",
+flag: "🇨🇱"
 },
 
+
 {
-country:"نيجيريا",
-speechCountry:"نِيجِيرْيَا",
-capital:"أبوجا",
-speechCapital:"أَبُوجَا",
-flag:"🇳🇬"
+country: "كولومبيا",
+speechCountry: "كُولُومْبِيَا",
+capital: "بوغوتا",
+speechCapital: "بُوغُوتَا",
+flag: "🇨🇴"
 },
 
+
 {
-country:"إثيوبيا",
-speechCountry:"إِثْيُوبْيَا",
-capital:"أديس أبابا",
-speechCapital:"أَدِيس أَبَابَا",
-flag:"🇪🇹"
+country: "بيرو",
+speechCountry: "بِيرُو",
+capital: "ليما",
+speechCapital: "لِيمَا",
+flag: "🇵🇪"
 },
+
 
 {
-country:"كينيا",
-speechCountry:"كِينْيَا",
-capital:"نيروبي",
-speechCapital:"نَيْرُوبِي",
-flag:"🇰🇪"
+country: "جنوب أفريقيا",
+speechCountry: "جَنُوبُ أَفْرِيقِيَا",
+capital: "بريتوريا",
+speechCapital: "بْرِيتُورِيَا",
+flag: "🇿🇦"
 },
 
+
 {
-country:"غانا",
-speechCountry:"غَانَا",
-capital:"أكرا",
-speechCapital:"أَكْرَا",
-flag:"🇬🇭"
+country: "نيجيريا",
+speechCountry: "نِيجِيرْيَا",
+capital: "أبوجا",
+speechCapital: "أَبُوجَا",
+flag: "🇳🇬"
 },
+
 
 {
-country:"تنزانيا",
-speechCountry:"تَنْزَانْيَا",
-capital:"دودوما",
-speechCapital:"دُودُومَا",
-flag:"🇹🇿"
+country: "إثيوبيا",
+speechCountry: "إِثْيُوبْيَا",
+capital: "أديس أبابا",
+speechCapital: "أَدِيس أَبَابَا",
+flag: "🇪🇹"
 },
 
+
 {
-country:"أوغندا",
-speechCountry:"أُوغَنْدَا",
-capital:"كمبالا",
-speechCapital:"كَمْبَالَا",
-flag:"🇺🇬"
+country: "كينيا",
+speechCountry: "كِينْيَا",
+capital: "نيروبي",
+speechCapital: "نَيْرُوبِي",
+flag: "🇰🇪"
 },
 
+
 {
-country:"الكونغو الديمقراطية",
-speechCountry:"الكُونْغُو الدِّيمُقْرَاطِيَّة",
-capital:"كينشاسا",
-speechCapital:"كِينْشَاسَا",
-flag:"🇨🇩"
+country: "غانا",
+speechCountry: "غَانَا",
+capital: "أكرا",
+speechCapital: "أَكْرَا",
+flag: "🇬🇭"
 },
+
 
 {
-country:"زيمبابوي",
-speechCountry:"زِيمْبَابْوِي",
-capital:"هراري",
-speechCapital:"هَرَارِي",
-flag:"🇿🇼"
+country: "تنزانيا",
+speechCountry: "تَنْزَانْيَا",
+capital: "دودوما",
+speechCapital: "دُودُومَا",
+flag: "🇹🇿"
 },
 
+
 {
-country:"زامبيا",
-speechCountry:"زَامْبِيَا",
-capital:"لوساكا",
-speechCapital:"لُوسَاكَا",
-flag:"🇿🇲"
+country: "أوغندا",
+speechCountry: "أُوغَنْدَا",
+capital: "كمبالا",
+speechCapital: "كَمْبَالَا",
+flag: "🇺🇬"
 },
+
 
 {
-country:"السنغال",
-speechCountry:"السِّنِغَال",
-capital:"داكار",
-speechCapital:"دَاكَار",
-flag:"🇸🇳"
+country: "زيمبابوي",
+speechCountry: "زِيمْبَابْوِي",
+capital: "هراري",
+speechCapital: "هَرَارِي",
+flag: "🇿🇼"
 },
 
+
 {
-country:"الكاميرون",
-speechCountry:"الكَامِيرُون",
-capital:"ياوندي",
-speechCapital:"يَاوَنْدِي",
-flag:"🇨🇲"
+country: "زامبيا",
+speechCountry: "زَامْبِيَا",
+capital: "لوساكا",
+speechCapital: "لُوسَاكَا",
+flag: "🇿🇲"
 },
 
+
 {
-country:"ساحل العاج",
-speechCountry:"سَاحِلُ العَاج",
-capital:"ياموسوكرو",
-speechCapital:"يَامُوسُوكْرُو",
-flag:"🇨🇮"
+country: "السنغال",
+speechCountry: "السِّنِغَال",
+capital: "داكار",
+speechCapital: "دَاكَار",
+flag: "🇸🇳"
 },
+
 
 {
-country:"إثيوبيا",
-speechCountry:"إِثْيُوبْيَا",
-capital:"أديس أبابا",
-speechCapital:"أَدِيس أَبَابَا",
-flag:"🇪🇹"
+country: "الكاميرون",
+speechCountry: "الكَامِيرُون",
+capital: "ياوندي",
+speechCapital: "يَاوَنْدِي",
+flag: "🇨🇲"
 }
+
+
+/* =====================================================
+   لا توجد إسرائيل
+   ولا توجد إثيوبيا مرتين
+===================================================== */
 
 ];
 
 
 /* =====================================================
-   إزالة التكرار إن وجد
-===================================================== */
-
-const uniqueCountries = [];
-
-const seenCountries = new Set();
-
-countries.forEach(item => {
-
-    if(!seenCountries.has(item.country)){
-
-        seenCountries.add(item.country);
-
-        uniqueCountries.push(item);
-
-    }
-
-});
-
-
-/* =====================================================
    المتغيرات
 ===================================================== */
+
+const QUESTIONS_PER_MODE = 20;
 
 let currentMode = "";
 
@@ -1263,244 +1534,208 @@ let wrongAnswers = 0;
 
 let answerLocked = false;
 
-let speechTimer = null;
+
+/*
+   رقم خاص للتحكم في الأصوات.
+
+   إذا ضغط المستخدم القائمة أو إعادة
+   نغيّر الرقم، وبالتالي أي صوت قديم
+   لن يكمل تنفيذ أوامره.
+*/
+
+let speechSession = 0;
 
 
 /* =====================================================
-   إعدادات اللعبة
+   خلط
 ===================================================== */
 
-const QUESTIONS_PER_MODE = 20;
+function shuffle(array) {
 
+    const result = [...array];
 
-/* =====================================================
-   النطق العربي
-===================================================== */
-
-function speakArabic(text){
-
-    if(!("speechSynthesis" in window)) return;
-
-    clearTimeout(speechTimer);
-
-    speechSynthesis.cancel();
-
-    const cleanText =
-        String(text)
-        .replace(/[🎉❌✅🌍🏳️🏛️]/g,"")
-        .trim();
-
-    if(!cleanText) return;
-
-    const u =
-        new SpeechSynthesisUtterance(cleanText);
-
-    /*
-       نستخدم العربية السعودية كلغة للنطق.
-       هذا لا يعني أن الجهاز يملك بالضرورة
-       صوتًا سعوديًا؛ يعتمد على الأصوات الموجودة
-       في الجهاز.
-    */
-
-    u.lang = "ar-SA";
-
-    u.rate = 0.88;
-
-    u.pitch = 1;
-
-    u.volume = 1;
-
-    const voices =
-        speechSynthesis.getVoices();
-
-    let arabicVoice =
-        voices.find(v =>
-            v.lang &&
-            v.lang.toLowerCase() === "ar-sa"
-        );
-
-    if(!arabicVoice){
-
-        arabicVoice =
-            voices.find(v =>
-                v.lang &&
-                v.lang.toLowerCase() === "ar"
-            );
-
-    }
-
-    if(!arabicVoice){
-
-        arabicVoice =
-            voices.find(v =>
-                v.lang &&
-                v.lang.toLowerCase().startsWith("ar-")
-            );
-
-    }
-
-    if(arabicVoice){
-
-        u.voice = arabicVoice;
-
-    }
-
-    speechSynthesis.speak(u);
-}
-
-
-/* =====================================================
-   الأصوات المسبقة
-===================================================== */
-
-function speakCorrect(){
-
-    speakArabic(
-        "أَحْسَنْتَ، الإِجَابَةُ صَحِيحَةٌ"
-    );
-
-}
-
-
-function speakWrong(){
-
-    speakArabic("خَطَأ");
-
-}
-
-
-function speakCorrectAnswer(item){
-
-    if(currentMode === "flagToCountry"){
-
-        speakArabic(
-            item.speechCountry
-        );
-
-    }
-
-    else if(currentMode === "countryToFlag"){
-
-        speakArabic(
-            item.speechCountry
-        );
-
-    }
-
-    else if(currentMode === "countryToCapital"){
-
-        speakArabic(
-            item.speechCapital
-        );
-
-    }
-
-    else if(currentMode === "capitalToCountry"){
-
-        speakArabic(
-            item.speechCountry
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   خلط المصفوفة
-===================================================== */
-
-function shuffle(array){
-
-    const arr = [...array];
-
-    for(let i = arr.length - 1; i > 0; i--){
+    for (
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ) {
 
         const j =
-            Math.floor(Math.random() * (i + 1));
+            Math.floor(
+                Math.random() * (i + 1)
+            );
 
         [
-            arr[i],
-            arr[j]
+            result[i],
+            result[j]
         ] =
         [
-            arr[j],
-            arr[i]
+            result[j],
+            result[i]
         ];
 
     }
 
-    return arr;
+    return result;
 }
 
 
 /* =====================================================
-   إنشاء أسئلة وضع معين
+   النطق العربي
+
+   مهم:
+   لا ننتقل للسؤال التالي حتى onend
+   ينتهي الصوت فعليًا.
 ===================================================== */
 
-function createQuestions(mode){
+function speakArabic(text) {
 
-    let pool =
-        shuffle(uniqueCountries);
+    return new Promise(resolve => {
 
-    /*
-       نأخذ 20 سؤالًا فقط.
-    */
+        if (
+            !("speechSynthesis" in window)
+        ) {
 
-    const selected =
-        pool.slice(
-            0,
-            Math.min(
-                QUESTIONS_PER_MODE,
-                pool.length
+            resolve();
+
+            return;
+        }
+
+
+        const mySession =
+            speechSession;
+
+
+        speechSynthesis.cancel();
+
+
+        const cleanText =
+            String(text)
+            .replace(
+                /[🎉❌✅🌍🏳️🏛️🇸🇦🇪🇬🇦🇪🇰🇼🇶🇦🇧🇭🇴🇲🇾🇪🇮🇶🇯🇴🇸🇾🇱🇧🇵🇸🇲🇦🇩🇿🇹🇳🇱🇾🇸🇩🇸🇴🇹🇷🇮🇷🇵🇰🇮🇳🇨🇳🇯🇵🇰🇷🇮🇩🇲🇾🇹🇭🇷🇺🇺🇦🇩🇪🇫🇷🇮🇹🇪🇸🇵🇹🇬🇧🇳🇱🇧🇪🇨🇭🇦🇹🇬🇷🇸🇪🇳🇴🇩🇰🇫🇮🇮🇪🇵🇱🇷🇴🇨🇿🇭🇺🇦🇺🇳🇿🇨🇦🇺🇸🇲🇽🇧🇷🇦🇷🇨🇱🇨🇴🇵🇪🇿🇦🇳🇬🇪🇹🇰🇪🇬🇭🇹🇿🇺🇬🇿🇼🇿🇲🇸🇳🇨🇲]/g,
+                ""
             )
+            .trim();
+
+
+        if (!cleanText) {
+
+            resolve();
+
+            return;
+        }
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                cleanText
+            );
+
+
+        utterance.lang =
+            "ar-SA";
+
+
+        /*
+           سرعة النطق.
+           0.88 أبطأ قليلًا حتى تكون
+           الكلمات أوضح.
+        */
+
+        utterance.rate =
+            0.88;
+
+
+        utterance.pitch =
+            1;
+
+
+        utterance.volume =
+            1;
+
+
+        const voices =
+            speechSynthesis.getVoices();
+
+
+        let arabicVoice =
+            voices.find(
+                voice =>
+                    voice.lang &&
+                    voice.lang.toLowerCase()
+                    === "ar-sa"
+            );
+
+
+        if (!arabicVoice) {
+
+            arabicVoice =
+                voices.find(
+                    voice =>
+                        voice.lang &&
+                        voice.lang.toLowerCase()
+                        === "ar"
+                );
+
+        }
+
+
+        if (!arabicVoice) {
+
+            arabicVoice =
+                voices.find(
+                    voice =>
+                        voice.lang &&
+                        voice.lang
+                        .toLowerCase()
+                        .startsWith("ar-")
+                );
+
+        }
+
+
+        if (arabicVoice) {
+
+            utterance.voice =
+                arabicVoice;
+
+        }
+
+
+        let finished =
+            false;
+
+
+        function done() {
+
+            if (finished)
+                return;
+
+            finished = true;
+
+            if (
+                mySession ===
+                speechSession
+            ) {
+
+                resolve();
+
+            }
+
+        }
+
+
+        utterance.onend =
+            done;
+
+
+        utterance.onerror =
+            done;
+
+
+        speechSynthesis.speak(
+            utterance
         );
-
-    return selected.map(item => {
-
-        let options;
-
-        if(
-            mode === "flagToCountry" ||
-            mode === "capitalToCountry"
-        ){
-
-            options =
-                makeOptions(
-                    item.country,
-                    "country"
-                );
-
-        }
-
-        else if(
-            mode === "countryToFlag"
-        ){
-
-            options =
-                makeOptions(
-                    item.country,
-                    "flag"
-                );
-
-        }
-
-        else if(
-            mode === "countryToCapital"
-        ){
-
-            options =
-                makeOptions(
-                    item.capital,
-                    "capital"
-                );
-
-        }
-
-        return {
-            item,
-            options
-        };
 
     });
 
@@ -1508,30 +1743,118 @@ function createQuestions(mode){
 
 
 /* =====================================================
-   إنشاء الاختيارات
+   إلغاء الصوت
 ===================================================== */
 
-function makeOptions(correctValue, type){
+function stopSpeech() {
+
+    speechSession++;
+
+    if (
+        "speechSynthesis"
+        in window
+    ) {
+
+        speechSynthesis.cancel();
+
+    }
+
+}
+
+
+/* =====================================================
+   جملة النجاح
+===================================================== */
+
+async function speakSuccess() {
+
+    await speakArabic(
+        "أَحْسَنْتَ، الإِجَابَةُ صَحِيحَةٌ"
+    );
+
+}
+
+
+/* =====================================================
+   جملة الخطأ
+===================================================== */
+
+async function speakError() {
+
+    await speakArabic(
+        "خَطَأ"
+    );
+
+}
+
+
+/* =====================================================
+   تحديد النص الصوتي للإجابة
+===================================================== */
+
+function getCorrectSpeech(
+    item,
+    questionType
+) {
+
+    if (
+        questionType ===
+        "countryToCapital"
+    ) {
+
+        return item.speechCapital;
+
+    }
+
+
+    return item.speechCountry;
+
+}
+
+
+/* =====================================================
+   إنشاء اختيارات
+===================================================== */
+
+function makeOptions(
+    correctValue,
+    type
+) {
 
     let values = [];
 
-    uniqueCountries.forEach(item => {
+
+    countries.forEach(item => {
 
         let value;
 
-        if(type === "country")
-            value = item.country;
 
-        else if(type === "capital")
-            value = item.capital;
+        if (type === "country") {
 
-        else
-            value = item.flag;
+            value =
+                item.country;
 
-        if(
+        }
+
+        else if (type === "capital") {
+
+            value =
+                item.capital;
+
+        }
+
+        else {
+
+            value =
+                item.flag;
+
+        }
+
+
+        if (
             value !== correctValue &&
             !values.includes(value)
-        ){
+        ) {
 
             values.push(value);
 
@@ -1539,11 +1862,16 @@ function makeOptions(correctValue, type){
 
     });
 
+
     values =
         shuffle(values)
-        .slice(0,3);
+        .slice(0, 3);
 
-    values.push(correctValue);
+
+    values.push(
+        correctValue
+    );
+
 
     return shuffle(values);
 
@@ -1551,68 +1879,198 @@ function makeOptions(correctValue, type){
 
 
 /* =====================================================
-   بدء الوضع
+   إنشاء أسئلة لنوع معين
 ===================================================== */
 
-function startMode(mode){
+function createQuestions(
+    questionType
+) {
 
-    clearTimeout(speechTimer);
+    const selected =
+        shuffle(countries)
+        .slice(
+            0,
+            QUESTIONS_PER_MODE
+        );
 
-    speechSynthesis.cancel();
 
-    lastMode = mode;
+    return selected.map(
+        item => {
 
-    currentMode = mode;
+            let options;
 
-    currentQuestion = 0;
 
-    score = 0;
+            if (
+                questionType ===
+                "flagToCountry"
+            ) {
 
-    correctAnswers = 0;
+                options =
+                    makeOptions(
+                        item.country,
+                        "country"
+                    );
 
-    wrongAnswers = 0;
+            }
 
-    answerLocked = false;
 
-    document.getElementById("menu").style.display =
+            else if (
+                questionType ===
+                "countryToFlag"
+            ) {
+
+                /*
+                   مهم جدًا:
+                   الإجابة الصحيحة هي العلم
+                   وليس اسم الدولة.
+                */
+
+                options =
+                    makeOptions(
+                        item.flag,
+                        "flag"
+                    );
+
+            }
+
+
+            else if (
+                questionType ===
+                "countryToCapital"
+            ) {
+
+                options =
+                    makeOptions(
+                        item.capital,
+                        "capital"
+                    );
+
+            }
+
+
+            else if (
+                questionType ===
+                "capitalToCountry"
+            ) {
+
+                options =
+                    makeOptions(
+                        item.country,
+                        "country"
+                    );
+
+            }
+
+
+            return {
+
+                item: item,
+
+                options: options,
+
+                questionType:
+                    questionType
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   بدء اللعبة
+===================================================== */
+
+function startMode(mode) {
+
+    stopSpeech();
+
+    lastMode =
+        mode;
+
+    currentMode =
+        mode;
+
+    currentQuestion =
+        0;
+
+    score =
+        0;
+
+    correctAnswers =
+        0;
+
+    wrongAnswers =
+        0;
+
+    answerLocked =
+        false;
+
+
+    document.getElementById(
+        "menu"
+    ).style.display =
         "none";
 
-    document.getElementById("result").style.display =
+
+    document.getElementById(
+        "result"
+    ).style.display =
         "none";
 
-    document.getElementById("game").style.display =
+
+    document.getElementById(
+        "game"
+    ).style.display =
         "block";
 
-    if(mode === "all"){
 
-        const q1 =
-            createQuestions("flagToCountry");
+    /*
+       وضع الجميع:
 
-        const q2 =
-            createQuestions("countryToFlag");
+       20 علم → دولة
+       20 دولة → علم
+       20 دولة → عاصمة
+       20 عاصمة → دولة
 
-        const q3 =
-            createQuestions("countryToCapital");
+       المجموع = 80
+    */
 
-        const q4 =
-            createQuestions("capitalToCountry");
+    if (mode === "all") {
 
-        questions =
-            shuffle([
-                ...q1,
-                ...q2,
-                ...q3,
-                ...q4
-            ]);
+        questions = shuffle([
+
+            ...createQuestions(
+                "flagToCountry"
+            ),
+
+            ...createQuestions(
+                "countryToFlag"
+            ),
+
+            ...createQuestions(
+                "countryToCapital"
+            ),
+
+            ...createQuestions(
+                "capitalToCountry"
+            )
+
+        ]);
 
     }
 
-    else{
+    else {
 
         questions =
-            createQuestions(mode);
+            createQuestions(
+                mode
+            );
 
     }
+
 
     showQuestion();
 
@@ -1623,375 +2081,295 @@ function startMode(mode){
    عرض السؤال
 ===================================================== */
 
-function showQuestion(){
+function showQuestion() {
 
-    clearTimeout(speechTimer);
+    stopSpeech();
 
-    speechSynthesis.cancel();
+    answerLocked =
+        false;
 
-    answerLocked = false;
 
-    document.getElementById("correction").innerHTML =
-        "";
-
-    if(currentQuestion >= questions.length){
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
 
         showResult();
 
         return;
-
     }
 
-    const q =
-        questions[currentQuestion];
+
+    const question =
+        questions[
+            currentQuestion
+        ];
+
 
     const item =
-        q.item;
+        question.item;
 
-    const title =
-        document.getElementById("questionTitle");
 
-    const content =
-        document.getElementById("questionContent");
+    const type =
+        question.questionType;
 
-    document.getElementById("questionNumber").textContent =
-        `السؤال ${currentQuestion + 1} / ${questions.length}`;
 
-    document.getElementById("score").textContent =
+    const questionNumber =
+        document.getElementById(
+            "questionNumber"
+        );
+
+
+    questionNumber.innerHTML =
+        `السؤال <span>${currentQuestion + 1} / ${questions.length}</span>`;
+
+
+    document.getElementById(
+        "score"
+    ).textContent =
         `النقاط: ${score}`;
 
-    title.textContent = "";
 
-    content.innerHTML = "";
-
-
-    /* =============================
-       علم → دولة
-    ============================= */
-
-    if(
-        currentMode === "flagToCountry" ||
-        (
-            currentMode === "all" &&
-            q.options.includes(item.country)
-        )
-    ){
-
-        /*
-           تحديد نوع السؤال في وضع الجميع
-        */
-
-        if(
-            questions[currentQuestion].mode
-        ){
-
-            // لا شيء
-        }
-
-    }
+    document.getElementById(
+        "correction"
+    ).innerHTML =
+        "";
 
 
-    /*
-       تحديد النوع الحقيقي للسؤال
-       لأن وضع الجميع يحتوي على أنواع مختلفة.
-    */
-
-    let questionType =
-        detectQuestionType(q);
+    const title =
+        document.getElementById(
+            "questionTitle"
+        );
 
 
-    if(questionType === "flagToCountry"){
+    const content =
+        document.getElementById(
+            "questionContent"
+        );
+
+
+    const answers =
+        document.getElementById(
+            "answers"
+        );
+
+
+    title.textContent =
+        "";
+
+
+    content.innerHTML =
+        "";
+
+
+    answers.innerHTML =
+        "";
+
+
+    /* =================================================
+       العلم → الدولة
+    ================================================= */
+
+    if (
+        type ===
+        "flagToCountry"
+    ) {
 
         title.textContent =
             "ما اسم هذه الدولة؟";
 
+
         content.innerHTML =
-            `<div class="flag">${item.flag}</div>`;
+            `<div class="flag">
+                ${item.flag}
+             </div>`;
 
     }
 
-    else if(questionType === "countryToFlag"){
+
+    /* =================================================
+       الدولة → العلم
+    ================================================= */
+
+    else if (
+        type ===
+        "countryToFlag"
+    ) {
 
         title.textContent =
             `ما علم ${item.country}؟`;
 
+
         content.innerHTML =
-            `<div class="capital">
+            `<div class="question-country">
                 ${item.country}
              </div>`;
 
     }
 
-    else if(questionType === "countryToCapital"){
+
+    /* =================================================
+       الدولة → العاصمة
+    ================================================= */
+
+    else if (
+        type ===
+        "countryToCapital"
+    ) {
 
         title.textContent =
             `ما عاصمة ${item.country}؟`;
 
+
         content.innerHTML =
-            `<div class="capital">
+            `<div class="question-country">
                 ${item.country}
              </div>`;
 
     }
 
-    else if(questionType === "capitalToCountry"){
+
+    /* =================================================
+       العاصمة → الدولة
+    ================================================= */
+
+    else if (
+        type ===
+        "capitalToCountry"
+    ) {
 
         title.textContent =
-            `هذه عاصمة أي دولة؟`;
+            "هذه عاصمة أي دولة؟";
+
 
         content.innerHTML =
-            `<div class="capital">
+            `<div class="question-capital">
                 ${item.capital}
              </div>`;
 
     }
 
 
-    const answers =
-        document.getElementById("answers");
+    /* =================================================
+       إنشاء الأزرار
+    ================================================= */
 
-    answers.innerHTML = "";
+    question.options.forEach(
+        option => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
 
 
-    q.options.forEach(option => {
+            button.className =
+                "answer";
 
-        const button =
-            document.createElement("button");
 
-        button.className =
-            "answer";
+            /*
+               الدولة → العلم
+               يجعل العلم كبيرًا.
+            */
 
-        /*
-           إذا كان السؤال علم → دولة
-           أو عاصمة → دولة
-        */
+            if (
+                type ===
+                "countryToFlag"
+            ) {
 
-        if(
-            questionType === "flagToCountry" ||
-            questionType === "capitalToCountry"
-        ){
+                button.classList.add(
+                    "flag-answer"
+                );
+
+            }
+
 
             button.textContent =
                 option;
 
-        }
 
-        else if(questionType === "countryToFlag"){
+            button.onclick =
+                function() {
 
-            button.textContent =
-                option;
+                    chooseAnswer(
+                        option
+                    );
 
-            button.style.fontSize =
-                "42px";
-
-        }
-
-        else{
-
-            button.textContent =
-                option;
-
-        }
+                };
 
 
-        button.onclick =
-            () =>
-            chooseAnswer(
-                option,
-                questionType
+            answers.appendChild(
+                button
             );
 
-        answers.appendChild(button);
-
-    });
-
-}
-
-
-/* =====================================================
-   تحديد نوع السؤال
-===================================================== */
-
-function detectQuestionType(q){
-
-    /*
-       في وضع "الجميع"
-       نخزن النوع داخل السؤال.
-
-       في الوضع العادي نستخدم currentMode.
-    */
-
-    if(q.questionType){
-
-        return q.questionType;
-
-    }
-
-    return currentMode;
+        }
+    );
 
 }
-
-
-/* =====================================================
-   إصلاح وضع الجميع
-===================================================== */
-
-function prepareAllQuestions(){
-
-    const q1 =
-        createQuestionsWithType(
-            "flagToCountry"
-        );
-
-    const q2 =
-        createQuestionsWithType(
-            "countryToFlag"
-        );
-
-    const q3 =
-        createQuestionsWithType(
-            "countryToCapital"
-        );
-
-    const q4 =
-        createQuestionsWithType(
-            "capitalToCountry"
-        );
-
-    return shuffle([
-        ...q1,
-        ...q2,
-        ...q3,
-        ...q4
-    ]);
-
-}
-
-
-function createQuestionsWithType(mode){
-
-    const result =
-        createQuestions(mode);
-
-    result.forEach(q => {
-
-        q.questionType = mode;
-
-    });
-
-    return result;
-
-}
-
-
-/* =====================================================
-   إعادة تعريف startMode
-   حتى يكون وضع الجميع مضبوطًا 80 سؤالًا
-===================================================== */
-
-function startGame(mode){
-
-    clearTimeout(speechTimer);
-
-    speechSynthesis.cancel();
-
-    lastMode = mode;
-
-    currentMode = mode;
-
-    currentQuestion = 0;
-
-    score = 0;
-
-    correctAnswers = 0;
-
-    wrongAnswers = 0;
-
-    answerLocked = false;
-
-    document.getElementById("menu").style.display =
-        "none";
-
-    document.getElementById("result").style.display =
-        "none";
-
-    document.getElementById("game").style.display =
-        "block";
-
-
-    if(mode === "all"){
-
-        questions =
-            prepareAllQuestions();
-
-    }
-
-    else{
-
-        questions =
-            createQuestionsWithType(mode);
-
-    }
-
-    showQuestion();
-
-}
-
-
-/*
-   نربط الزرار بالدالة الجديدة.
-*/
-
-window.startMode =
-    startGame;
 
 
 /* =====================================================
    اختيار الإجابة
 ===================================================== */
 
-function chooseAnswer(
-    selected,
-    questionType
-){
+async function chooseAnswer(
+    selected
+) {
 
-    if(answerLocked) return;
+    if (answerLocked)
+        return;
 
-    answerLocked = true;
 
-    clearTimeout(speechTimer);
+    answerLocked =
+        true;
 
-    speechSynthesis.cancel();
 
-    const q =
-        questions[currentQuestion];
+    stopSpeech();
+
+
+    const question =
+        questions[
+            currentQuestion
+        ];
+
 
     const item =
-        q.item;
+        question.item;
+
+
+    const type =
+        question.questionType;
+
 
     let correctValue;
 
 
-    if(
-        questionType === "flagToCountry" ||
-        questionType === "capitalToCountry"
-    ){
+    if (
+        type ===
+        "flagToCountry"
+    ) {
 
         correctValue =
             item.country;
 
     }
 
-    else if(
-        questionType === "countryToFlag"
-    ){
+
+    else if (
+        type ===
+        "countryToFlag"
+    ) {
 
         correctValue =
             item.flag;
 
     }
 
-    else{
+
+    else if (
+        type ===
+        "countryToCapital"
+    ) {
 
         correctValue =
             item.capital;
@@ -1999,154 +2377,411 @@ function chooseAnswer(
     }
 
 
+    else {
+
+        correctValue =
+            item.country;
+
+    }
+
+
     const isCorrect =
-        selected === correctValue;
+        selected ===
+        correctValue;
 
 
     const buttons =
-        document.querySelectorAll(".answer");
+        document.querySelectorAll(
+            ".answer"
+        );
 
 
-    buttons.forEach(button => {
+    buttons.forEach(
+        button => {
 
-        button.classList.add("disabled");
+            button.classList.add(
+                "disabled"
+            );
 
-        if(
-            button.textContent ===
-            correctValue
-        ){
 
-            button.classList.add("correct");
+            if (
+                button.textContent ===
+                correctValue
+            ) {
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+
+            if (
+                button.textContent ===
+                selected &&
+                !isCorrect
+            ) {
+
+                button.classList.add(
+                    "wrong"
+                );
+
+            }
 
         }
-
-        if(
-            button.textContent ===
-            selected &&
-            !isCorrect
-        ){
-
-            button.classList.add("wrong");
-
-        }
-
-    });
+    );
 
 
     const correction =
-        document.getElementById("correction");
+        document.getElementById(
+            "correction"
+        );
 
 
-    if(isCorrect){
+    /* =================================================
+       إجابة صحيحة
+    ================================================= */
 
-        score += 1;
+    if (isCorrect) {
 
-        correctAnswers += 1;
+        score++;
+
+        correctAnswers++;
+
 
         correction.innerHTML =
             `<div class="correct-message">
                 أحسنت! الإجابة صحيحة 🎉
              </div>`;
 
+
         /*
-           لا ننطق الاختيار ثم الإجابة.
-           ننطق جملة النجاح فقط.
+           المفرقعات
         */
 
-        speakCorrect();
+        createConfetti();
 
 
-        speechTimer =
-            setTimeout(() => {
+        /*
+           ننتظر حتى ينتهي الصوت كاملًا.
+        */
 
-                currentQuestion++;
+        await speakSuccess();
 
-                showQuestion();
 
-            }, 1500);
+        /*
+           إذا لم يلغِ المستخدم اللعبة
+        */
+
+        if (
+            currentQuestion <
+            questions.length
+        ) {
+
+            currentQuestion++;
+
+            showQuestion();
+
+        }
+
 
     }
 
-    else{
 
-        wrongAnswers += 1;
+    /* =================================================
+       إجابة خاطئة
+    ================================================= */
+
+    else {
+
+        wrongAnswers++;
+
 
         correction.innerHTML =
             `<div class="wrong-message">
                 خطأ ❌
              </div>`;
 
-        /*
-           ننطق "خطأ" فقط.
-        */
-
-        speakWrong();
-
 
         /*
-           بعد ثانيتين ننطق الإجابة الصحيحة.
+           أولًا ينطق "خطأ"
+           وينتظر حتى ينتهي الصوت.
         */
 
-        speechTimer =
-            setTimeout(() => {
-
-                speakCorrectAnswer(item);
-
-                let answerText;
+        await speakError();
 
 
-                if(
-                    questionType === "flagToCountry" ||
-                    questionType === "capitalToCountry"
-                ){
+        /*
+           إذا ألغى المستخدم اللعبة
+           نتوقف.
+        */
 
-                    answerText =
-                        item.country;
+        if (
+            currentQuestion >=
+            questions.length
+        ) {
 
-                }
+            return;
 
-                else if(
-                    questionType === "countryToFlag"
-                ){
-
-                    answerText =
-                        `${item.country} ${item.flag}`;
-
-                }
-
-                else{
-
-                    answerText =
-                        item.capital;
-
-                }
+        }
 
 
-                correction.innerHTML =
-                    `<div class="wrong-message">
-                        خطأ ❌
-                     </div>
-                     <div class="correct-answer">
-                        الإجابة الصحيحة:
-                        ${answerText}
-                     </div>`;
+        /*
+           انتظار ثانيتين كاملتين.
+        */
+
+        await wait(2000);
 
 
-                /*
-                   الانتقال للسؤال التالي
-                   بعد عرض الإجابة الصحيحة.
-                */
+        /*
+           إذا ضغط المستخدم القائمة
+           أثناء الانتظار.
+        */
 
-                speechTimer =
-                    setTimeout(() => {
+        if (
+            answerLocked === false
+        ) {
 
-                        currentQuestion++;
+            return;
 
-                        showQuestion();
+        }
 
-                    }, 2500);
 
-            }, 2000);
+        const correctSpeech =
+            getCorrectSpeech(
+                item,
+                type
+            );
+
+
+        /*
+           عرض الإجابة الصحيحة.
+        */
+
+        let displayedAnswer;
+
+
+        if (
+            type ===
+            "countryToFlag"
+        ) {
+
+            displayedAnswer =
+                `${item.country} ${item.flag}`;
+
+        }
+
+        else if (
+            type ===
+            "flagToCountry"
+        ) {
+
+            displayedAnswer =
+                item.country;
+
+        }
+
+        else if (
+            type ===
+            "countryToCapital"
+        ) {
+
+            displayedAnswer =
+                item.capital;
+
+        }
+
+        else {
+
+            displayedAnswer =
+                item.country;
+
+        }
+
+
+        correction.innerHTML =
+            `<div class="wrong-message">
+                خطأ ❌
+             </div>
+
+             <div class="correct-answer">
+                الإجابة الصحيحة:
+                ${displayedAnswer}
+             </div>`;
+
+
+        /*
+           نطق الإجابة الصحيحة كاملة.
+        */
+
+        await speakArabic(
+            correctSpeech
+        );
+
+
+        /*
+           الآن فقط ننتقل للسؤال التالي.
+        */
+
+        if (
+            answerLocked
+        ) {
+
+            currentQuestion++;
+
+            showQuestion();
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   الانتظار
+===================================================== */
+
+function wait(ms) {
+
+    return new Promise(
+        resolve => {
+
+            setTimeout(
+                resolve,
+                ms
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   المفرقعات 🎉
+===================================================== */
+
+function createConfetti() {
+
+    const pieces =
+        45;
+
+
+    const symbols = [
+        "🎉",
+        "🎊",
+        "✨",
+        "⭐",
+        "🌟"
+    ];
+
+
+    for (
+        let i = 0;
+        i < pieces;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.className =
+            "confetti";
+
+
+        /*
+           بعض القطع Emoji
+           وبعضها مستطيلات خفيفة.
+        */
+
+        if (
+            Math.random() < 0.35
+        ) {
+
+            piece.textContent =
+                symbols[
+                    Math.floor(
+                        Math.random()
+                        * symbols.length
+                    )
+                ];
+
+            piece.style.width =
+                "auto";
+
+            piece.style.height =
+                "auto";
+
+            piece.style.fontSize =
+                "18px";
+
+        }
+
+
+        else {
+
+            const colors = [
+
+                "#ef4444",
+                "#22c55e",
+                "#3b82f6",
+                "#facc15",
+                "#ec4899",
+                "#a855f7"
+
+            ];
+
+
+            piece.style.background =
+                colors[
+                    Math.floor(
+                        Math.random()
+                        * colors.length
+                    )
+                ];
+
+        }
+
+
+        piece.style.left =
+            Math.random() * 100
+            + "%";
+
+
+        piece.style.animationDuration =
+            (
+                1.1 +
+                Math.random() * .8
+            )
+            + "s";
+
+
+        piece.style.animationDelay =
+            (
+                Math.random() * .2
+            )
+            + "s";
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            () => {
+
+                piece.remove();
+
+            },
+
+            2200
+
+        );
 
     }
 
@@ -2157,21 +2792,26 @@ function chooseAnswer(
    النتيجة
 ===================================================== */
 
-function showResult(){
+function showResult() {
 
-    clearTimeout(speechTimer);
+    stopSpeech();
 
-    speechSynthesis.cancel();
 
-    document.getElementById("game").style.display =
+    document.getElementById(
+        "game"
+    ).style.display =
         "none";
 
-    document.getElementById("result").style.display =
+
+    document.getElementById(
+        "result"
+    ).style.display =
         "block";
 
 
     const total =
         questions.length;
+
 
     const percentage =
         Math.round(
@@ -2179,52 +2819,54 @@ function showResult(){
         );
 
 
-    document.getElementById("resultScore").textContent =
+    document.getElementById(
+        "resultScore"
+    ).textContent =
         `${percentage}%`;
 
 
-    let text;
+    let resultText;
 
 
-    if(percentage >= 90){
+    if (percentage >= 90) {
 
-        text =
+        resultText =
             `ممتاز جدًا! 🎉
              <br>
              ${score} من ${total}`;
 
     }
 
-    else if(percentage >= 80){
+    else if (percentage >= 80) {
 
-        text =
+        resultText =
             `ممتاز 👏
              <br>
              ${score} من ${total}`;
 
     }
 
-    else if(percentage >= 70){
+    else if (percentage >= 70) {
 
-        text =
+        resultText =
             `جيد جدًا 👍
              <br>
              ${score} من ${total}`;
 
     }
 
-    else if(percentage >= 60){
+    else if (percentage >= 60) {
 
-        text =
+        resultText =
             `جيد 🙂
              <br>
              ${score} من ${total}`;
 
     }
 
-    else{
+    else {
 
-        text =
+        resultText =
             `حاول مرة أخرى 💪
              <br>
              ${score} من ${total}`;
@@ -2232,50 +2874,72 @@ function showResult(){
     }
 
 
-    document.getElementById("resultText").innerHTML =
-        text;
+    document.getElementById(
+        "resultText"
+    ).innerHTML =
+        resultText;
 
 }
 
 
 /* =====================================================
-   العودة إلى القائمة
+   العودة للقائمة
 ===================================================== */
 
-function goToMenu(){
+function goToMenu() {
 
-    clearTimeout(speechTimer);
-
-    speechSynthesis.cancel();
-
-    const ok =
+    const confirmed =
         confirm(
             "ستُصفّر الإحصائيات الحالية.\n\nهل تريد العودة إلى القائمة؟"
         );
 
-    if(!ok) return;
+
+    if (!confirmed)
+        return;
 
 
-    currentQuestion = 0;
-
-    score = 0;
-
-    correctAnswers = 0;
-
-    wrongAnswers = 0;
-
-    questions = [];
-
-    answerLocked = false;
+    stopSpeech();
 
 
-    document.getElementById("game").style.display =
+    answerLocked =
+        false;
+
+
+    currentQuestion =
+        0;
+
+
+    score =
+        0;
+
+
+    correctAnswers =
+        0;
+
+
+    wrongAnswers =
+        0;
+
+
+    questions =
+        [];
+
+
+    document.getElementById(
+        "game"
+    ).style.display =
         "none";
 
-    document.getElementById("result").style.display =
+
+    document.getElementById(
+        "result"
+    ).style.display =
         "none";
 
-    document.getElementById("menu").style.display =
+
+    document.getElementById(
+        "menu"
+    ).style.display =
         "flex";
 
 }
@@ -2285,21 +2949,24 @@ function goToMenu(){
    إعادة اللعبة
 ===================================================== */
 
-function restartGame(){
+function restartGame() {
 
-    clearTimeout(speechTimer);
-
-    speechSynthesis.cancel();
-
-    const ok =
+    const confirmed =
         confirm(
             "ستُصفّر الإحصائيات الحالية.\n\nهل تريد إعادة اللعبة؟"
         );
 
-    if(!ok) return;
+
+    if (!confirmed)
+        return;
 
 
-    startGame(lastMode);
+    stopSpeech();
+
+
+    startMode(
+        lastMode
+    );
 
 }
 
@@ -2308,12 +2975,21 @@ function restartGame(){
    تحميل الأصوات
 ===================================================== */
 
-if("speechSynthesis" in window){
+if (
+    "speechSynthesis"
+    in window
+) {
 
-    speechSynthesis.onvoiceschanged =
-        function(){
+    speechSynthesis
+        .getVoices();
 
-            speechSynthesis.getVoices();
+
+    speechSynthesis
+        .onvoiceschanged =
+        function() {
+
+            speechSynthesis
+                .getVoices();
 
         };
 
