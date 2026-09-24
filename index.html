@@ -19,10 +19,6 @@ content="yes">
 
 <style>
 
-/* =====================================================
-   الأساس
-===================================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -64,11 +60,6 @@ body {
     margin: auto;
 }
 
-
-/* =====================================================
-   العنوان
-===================================================== */
-
 h1 {
 
     text-align: center;
@@ -89,11 +80,6 @@ h1 {
 
     font-size: 16px;
 }
-
-
-/* =====================================================
-   القائمة
-===================================================== */
 
 .menu {
 
@@ -145,20 +131,10 @@ h1 {
     opacity: .85;
 }
 
-
-/* =====================================================
-   اللعبة
-===================================================== */
-
 .game {
 
     display: none;
 }
-
-
-/* =====================================================
-   الشريط العلوي
-===================================================== */
 
 .top-bar {
 
@@ -201,11 +177,6 @@ h1 {
 
     font-weight: bold;
 }
-
-
-/* =====================================================
-   صندوق السؤال
-===================================================== */
 
 .question-box {
 
@@ -274,11 +245,6 @@ h1 {
 
     color: #facc15;
 }
-
-
-/* =====================================================
-   الاختيارات
-===================================================== */
 
 .answers {
 
@@ -349,11 +315,6 @@ h1 {
     pointer-events: none;
 }
 
-
-/* =====================================================
-   التصحيح
-===================================================== */
-
 .correction {
 
     min-height: 75px;
@@ -389,11 +350,6 @@ h1 {
 
     margin-top: 5px;
 }
-
-
-/* =====================================================
-   أزرار التحكم
-===================================================== */
 
 .controls {
 
@@ -437,11 +393,6 @@ h1 {
 
     transform: scale(.96);
 }
-
-
-/* =====================================================
-   النتيجة
-===================================================== */
 
 .result {
 
@@ -522,11 +473,6 @@ h1 {
     cursor: pointer;
 }
 
-
-/* =====================================================
-   المفرقعات
-===================================================== */
-
 .confetti {
 
     position: fixed;
@@ -568,11 +514,6 @@ h1 {
         opacity: 0;
     }
 }
-
-
-/* =====================================================
-   الجوال
-===================================================== */
 
 @media (max-width: 500px) {
 
@@ -643,10 +584,6 @@ h1 {
 </div>
 
 
-<!-- =====================================================
-     القائمة الرئيسية
-===================================================== -->
-
 <div id="menu" class="menu">
 
 
@@ -697,10 +634,6 @@ onclick="startMode('capitalToCountry')">
 
 </div>
 
-
-<!-- =====================================================
-     اللعبة
-===================================================== -->
 
 <div id="game" class="game">
 
@@ -784,10 +717,6 @@ onclick="restartGame()">
 
 </div>
 
-
-<!-- =====================================================
-     النتيجة
-===================================================== -->
 
 <div
 id="result"
@@ -1485,7 +1414,6 @@ function shuffle(array) {
     }
 
     return result;
-
 }
 
 
@@ -1504,16 +1432,12 @@ function speakArabic(text) {
             resolve();
 
             return;
-
         }
-
 
         const mySession =
             speechSession;
 
-
         speechSynthesis.cancel();
-
 
         const cleanText =
             String(text)
@@ -1523,21 +1447,17 @@ function speakArabic(text) {
             )
             .trim();
 
-
         if (!cleanText) {
 
             resolve();
 
             return;
-
         }
-
 
         const utterance =
             new SpeechSynthesisUtterance(
                 cleanText
             );
-
 
         utterance.lang =
             "ar-SA";
@@ -1551,10 +1471,8 @@ function speakArabic(text) {
         utterance.volume =
             1;
 
-
         const voices =
             speechSynthesis.getVoices();
-
 
         let arabicVoice =
             voices.find(
@@ -1563,7 +1481,6 @@ function speakArabic(text) {
                     voice.lang.toLowerCase()
                     === "ar-sa"
             );
-
 
         if (!arabicVoice) {
 
@@ -1574,9 +1491,7 @@ function speakArabic(text) {
                         voice.lang.toLowerCase()
                         === "ar"
                 );
-
         }
-
 
         if (!arabicVoice) {
 
@@ -1588,21 +1503,15 @@ function speakArabic(text) {
                         .toLowerCase()
                         .startsWith("ar-")
                 );
-
         }
-
 
         if (arabicVoice) {
 
             utterance.voice =
                 arabicVoice;
-
         }
 
-
-        let finished =
-            false;
-
+        let finished = false;
 
         function done() {
 
@@ -1611,17 +1520,13 @@ function speakArabic(text) {
 
             finished = true;
 
-            if (
-                mySession ===
-                speechSession
-            ) {
+            /*
+               نحل الـ Promise دائمًا حتى لا تتوقف
+               اللعبة إذا تم إلغاء النطق.
+            */
 
-                resolve();
-
-            }
-
+            resolve();
         }
-
 
         utterance.onend =
             done;
@@ -1629,13 +1534,11 @@ function speakArabic(text) {
         utterance.onerror =
             done;
 
-
         speechSynthesis.speak(
             utterance
         );
 
     });
-
 }
 
 
@@ -1655,7 +1558,6 @@ function stopSpeech() {
         speechSynthesis.cancel();
 
     }
-
 }
 
 
@@ -1669,13 +1571,7 @@ async function speakSuccess() {
         "أَحْسَنْتَ"
     );
 
-    /*
-       مهلة قصيرة حتى لا ينقطع آخر
-       صوت قبل الانتقال للسؤال التالي
-    */
-
-    await wait(200);
-
+    await wait(250);
 }
 
 
@@ -1685,31 +1581,15 @@ async function speakSuccess() {
 
 async function speakError() {
 
-    /*
-       نطق كلمة خطأ لوحدها
-       حتى لا تتحول إلى نطق غير صحيح
-    */
-
     await speakArabic(
         "خَطَأ"
     );
 
-
-    /*
-       فاصل 0.3 ثانية
-    */
-
     await wait(300);
-
-
-    /*
-       نطق الجملة الثانية لوحدها
-    */
 
     await speakArabic(
         "الإِجَابَةُ هِيَ"
     );
-
 }
 
 
@@ -1728,16 +1608,14 @@ function getCorrectSpeech(
     ) {
 
         return item.speechCapital;
-
     }
 
     return item.speechCountry;
-
 }
 
 
 /* =====================================================
-   إنشاء اختيارات
+   إنشاء الاختيارات
 ===================================================== */
 
 function makeOptions(
@@ -1747,33 +1625,27 @@ function makeOptions(
 
     let values = [];
 
-
     countries.forEach(item => {
 
         let value;
-
 
         if (type === "country") {
 
             value =
                 item.country;
-
         }
 
         else if (type === "capital") {
 
             value =
                 item.capital;
-
         }
 
         else {
 
             value =
                 item.flag;
-
         }
-
 
         if (
             value !== correctValue &&
@@ -1781,29 +1653,24 @@ function makeOptions(
         ) {
 
             values.push(value);
-
         }
 
     });
-
 
     values =
         shuffle(values)
         .slice(0, 3);
 
-
     values.push(
         correctValue
     );
 
-
     return shuffle(values);
-
 }
 
 
 /* =====================================================
-   إنشاء أسئلة لنوع معين
+   إنشاء الأسئلة
 ===================================================== */
 
 function createQuestions(
@@ -1817,12 +1684,10 @@ function createQuestions(
             QUESTIONS_PER_MODE
         );
 
-
     return selected.map(
         item => {
 
             let options;
-
 
             if (
                 questionType ===
@@ -1834,9 +1699,7 @@ function createQuestions(
                         item.country,
                         "country"
                     );
-
             }
-
 
             else if (
                 questionType ===
@@ -1848,9 +1711,7 @@ function createQuestions(
                         item.flag,
                         "flag"
                     );
-
             }
-
 
             else if (
                 questionType ===
@@ -1862,9 +1723,7 @@ function createQuestions(
                         item.capital,
                         "capital"
                     );
-
             }
-
 
             else if (
                 questionType ===
@@ -1876,9 +1735,7 @@ function createQuestions(
                         item.country,
                         "country"
                     );
-
             }
-
 
             return {
 
@@ -1893,7 +1750,6 @@ function createQuestions(
 
         }
     );
-
 }
 
 
@@ -1926,24 +1782,20 @@ function startMode(mode) {
     answerLocked =
         false;
 
-
     document.getElementById(
         "menu"
     ).style.display =
         "none";
-
 
     document.getElementById(
         "result"
     ).style.display =
         "none";
 
-
     document.getElementById(
         "game"
     ).style.display =
         "block";
-
 
     if (mode === "all") {
 
@@ -1975,12 +1827,9 @@ function startMode(mode) {
             createQuestions(
                 mode
             );
-
     }
 
-
     showQuestion();
-
 }
 
 
@@ -1995,7 +1844,6 @@ function showQuestion() {
     answerLocked =
         false;
 
-
     if (
         currentQuestion >=
         questions.length
@@ -2004,63 +1852,51 @@ function showQuestion() {
         showResult();
 
         return;
-
     }
-
 
     const question =
         questions[
             currentQuestion
         ];
 
-
     const item =
         question.item;
 
-
     const type =
         question.questionType;
-
 
     const questionNumber =
         document.getElementById(
             "questionNumber"
         );
 
-
     questionNumber.innerHTML =
         `السؤال <span>${currentQuestion + 1} / ${questions.length}</span>`;
-
 
     document.getElementById(
         "score"
     ).textContent =
         `النقاط: ${score}`;
 
-
     document.getElementById(
         "correction"
     ).innerHTML =
         "";
-
 
     const title =
         document.getElementById(
             "questionTitle"
         );
 
-
     const content =
         document.getElementById(
             "questionContent"
         );
 
-
     const answers =
         document.getElementById(
             "answers"
         );
-
 
     title.textContent =
         "";
@@ -2072,10 +1908,6 @@ function showQuestion() {
         "";
 
 
-    /* =================================================
-       العلم → الدولة
-    ================================================= */
-
     if (
         type ===
         "flagToCountry"
@@ -2084,18 +1916,12 @@ function showQuestion() {
         title.textContent =
             "ما اسم هذه الدولة؟";
 
-
         content.innerHTML =
             `<div class="flag">
                 ${item.flag}
              </div>`;
-
     }
 
-
-    /* =================================================
-       الدولة → العلم
-    ================================================= */
 
     else if (
         type ===
@@ -2105,18 +1931,12 @@ function showQuestion() {
         title.textContent =
             `ما علم ${item.country}؟`;
 
-
         content.innerHTML =
             `<div class="question-country">
                 ${item.country}
              </div>`;
-
     }
 
-
-    /* =================================================
-       الدولة → العاصمة
-    ================================================= */
 
     else if (
         type ===
@@ -2126,18 +1946,12 @@ function showQuestion() {
         title.textContent =
             `ما عاصمة ${item.country}؟`;
 
-
         content.innerHTML =
             `<div class="question-country">
                 ${item.country}
              </div>`;
-
     }
 
-
-    /* =================================================
-       العاصمة → الدولة
-    ================================================= */
 
     else if (
         type ===
@@ -2147,12 +1961,10 @@ function showQuestion() {
         title.textContent =
             "هذه عاصمة أي دولة؟";
 
-
         content.innerHTML =
             `<div class="question-capital">
                 ${item.capital}
              </div>`;
-
     }
 
 
@@ -2168,7 +1980,6 @@ function showQuestion() {
                     "button"
                 );
 
-
             button.className =
                 "answer";
 
@@ -2181,8 +1992,17 @@ function showQuestion() {
                 button.classList.add(
                     "flag-answer"
                 );
-
             }
+
+
+            /*
+               مهم جدًا:
+               نخزن القيمة الأصلية للزر.
+               التصحيح لن يعتمد على textContent.
+            */
+
+            button.dataset.value =
+                option;
 
 
             button.textContent =
@@ -2205,7 +2025,6 @@ function showQuestion() {
 
         }
     );
-
 }
 
 
@@ -2221,29 +2040,47 @@ async function chooseAnswer(
         return;
 
 
-    answerLocked =
-        true;
+    /*
+       نثبت رقم السؤال لحظة الضغط.
+       هذا يمنع أي عملية صوت قديمة من التعامل
+       مع سؤال آخر.
+    */
+
+    const questionIndex =
+        currentQuestion;
 
 
-    stopSpeech();
-
+    /*
+       نثبت كائن السؤال نفسه.
+    */
 
     const question =
         questions[
-            currentQuestion
+            questionIndex
         ];
 
 
+    if (!question)
+        return;
+
+
+    /*
+       نثبت بيانات السؤال.
+    */
+
     const item =
         question.item;
-
 
     const type =
         question.questionType;
 
 
-    let correctValue;
+    /*
+       نثبت الإجابة الصحيحة الآن.
+       ولن نعيد حسابها من سؤال آخر لاحقًا.
+    */
 
+    let correctValue;
 
     if (
         type ===
@@ -2252,9 +2089,7 @@ async function chooseAnswer(
 
         correctValue =
             item.country;
-
     }
-
 
     else if (
         type ===
@@ -2263,9 +2098,7 @@ async function chooseAnswer(
 
         correctValue =
             item.flag;
-
     }
-
 
     else if (
         type ===
@@ -2274,17 +2107,76 @@ async function chooseAnswer(
 
         correctValue =
             item.capital;
-
     }
-
 
     else {
 
         correctValue =
             item.country;
-
     }
 
+
+    /*
+       نثبت النص الذي سينطق لاحقًا.
+    */
+
+    const correctSpeech =
+        getCorrectSpeech(
+            item,
+            type
+        );
+
+
+    /*
+       نثبت أيضًا الإجابة المعروضة.
+    */
+
+    let displayedAnswer;
+
+    if (
+        type ===
+        "countryToFlag"
+    ) {
+
+        displayedAnswer =
+            `${item.country} ${item.flag}`;
+    }
+
+    else if (
+        type ===
+        "flagToCountry"
+    ) {
+
+        displayedAnswer =
+            item.country;
+    }
+
+    else if (
+        type ===
+        "countryToCapital"
+    ) {
+
+        displayedAnswer =
+            item.capital;
+    }
+
+    else {
+
+        displayedAnswer =
+            item.country;
+    }
+
+
+    answerLocked =
+        true;
+
+
+    stopSpeech();
+
+
+    /*
+       مقارنة الإجابة بالقيمة الأصلية.
+    */
 
     const isCorrect =
         selected ===
@@ -2297,6 +2189,10 @@ async function chooseAnswer(
         );
 
 
+    /*
+       تعطيل جميع الأزرار.
+    */
+
     buttons.forEach(
         button => {
 
@@ -2305,20 +2201,36 @@ async function chooseAnswer(
             );
 
 
+            /*
+               نستخدم dataset.value
+               وليس textContent.
+            */
+
+            const buttonValue =
+                button.dataset.value;
+
+
+            /*
+               تلوين الإجابة الصحيحة.
+            */
+
             if (
-                button.textContent ===
+                buttonValue ===
                 correctValue
             ) {
 
                 button.classList.add(
                     "correct"
                 );
-
             }
 
 
+            /*
+               تلوين إجابة المستخدم بالخطأ.
+            */
+
             if (
-                button.textContent ===
+                buttonValue ===
                 selected &&
                 !isCorrect
             ) {
@@ -2326,7 +2238,6 @@ async function chooseAnswer(
                 button.classList.add(
                     "wrong"
                 );
-
             }
 
         }
@@ -2360,24 +2271,44 @@ async function chooseAnswer(
 
 
         /*
-           النطق:
+           ننطق فقط:
            أحسنت
         */
 
         await speakSuccess();
 
 
+        /*
+           إذا تغيّر السؤال أثناء النطق
+           نتوقف ولا ننتقل بشكل خاطئ.
+        */
+
         if (
-            currentQuestion <
-            questions.length
+            questions[questionIndex] !==
+            question
+        ) {
+
+            return;
+        }
+
+
+        /*
+           إذا ما زلنا في نفس السؤال،
+           ننتقل للسؤال التالي.
+        */
+
+        if (
+            currentQuestion ===
+            questionIndex
         ) {
 
             currentQuestion++;
 
             showQuestion();
-
         }
 
+
+        return;
     }
 
 
@@ -2385,143 +2316,102 @@ async function chooseAnswer(
        إجابة خاطئة
     ================================================= */
 
-    else {
-
-        wrongAnswers++;
+    wrongAnswers++;
 
 
-        correction.innerHTML =
-            `<div class="wrong-message">
-                خطأ ❌
-             </div>`;
+    correction.innerHTML =
+        `<div class="wrong-message">
+            خطأ ❌
+         </div>`;
 
 
-        /*
-           النطق:
-           خَطَأ
-           ثم بعد 0.3 ثانية
-           الإِجَابَةُ هِيَ
-        */
+    /*
+       خطأ
+       ثم 0.3 ثانية
+       ثم الإجابة هي
+    */
 
-        await speakError();
-
-
-        /*
-           انتظار ثانية كاملة
-           قبل نطق الإجابة الصحيحة
-        */
-
-        await wait(1000);
+    await speakError();
 
 
-        /*
-           إذا أُلغيت اللعبة
-           نتوقف
-        */
+    /*
+       ثانية كاملة قبل نطق الإجابة.
+    */
 
-        if (
-            answerLocked === false
-        ) {
-
-            return;
-
-        }
+    await wait(1000);
 
 
-        const correctSpeech =
-            getCorrectSpeech(
-                item,
-                type
-            );
+    /*
+       نتأكد أن نفس السؤال ما زال موجودًا.
+    */
+
+    if (
+        questions[questionIndex] !==
+        question
+    ) {
+
+        return;
+    }
 
 
-        /* =================================================
-           عرض الإجابة الصحيحة
-        ================================================= */
+    /*
+       نعرض الإجابة الصحيحة المثبتة.
+    */
 
-        let displayedAnswer;
+    correction.innerHTML =
+        `<div class="wrong-message">
+            خطأ ❌
+         </div>
 
-
-        if (
-            type ===
-            "countryToFlag"
-        ) {
-
-            displayedAnswer =
-                `${item.country} ${item.flag}`;
-
-        }
-
-        else if (
-            type ===
-            "flagToCountry"
-        ) {
-
-            displayedAnswer =
-                item.country;
-
-        }
-
-        else if (
-            type ===
-            "countryToCapital"
-        ) {
-
-            displayedAnswer =
-                item.capital;
-
-        }
-
-        else {
-
-            displayedAnswer =
-                item.country;
-
-        }
+         <div class="correct-answer">
+            الإجابة الصحيحة:
+            ${displayedAnswer}
+         </div>`;
 
 
-        correction.innerHTML =
-            `<div class="wrong-message">
-                خطأ ❌
-             </div>
+    /*
+       ننطق الإجابة الصحيحة المثبتة.
+    */
 
-             <div class="correct-answer">
-                الإجابة الصحيحة:
-                ${displayedAnswer}
-             </div>`;
+    await speakArabic(
+        correctSpeech
+    );
 
 
-        /*
-           نطق الإجابة الصحيحة
-        */
+    /*
+       ننتظر قليلًا بعد انتهاء النطق
+       حتى لا ينقطع آخر حرف.
+    */
 
-        await speakArabic(
-            correctSpeech
-        );
-
-
-        /*
-           مهلة قصيرة جدًا بعد انتهاء الصوت
-           حتى لا ينقطع آخر حرف
-        */
-
-        await wait(200);
+    await wait(250);
 
 
-        /*
-           الانتقال للسؤال التالي
-        */
+    /*
+       نتأكد مرة أخرى أن السؤال نفسه
+       ما زال هو السؤال الحالي.
+    */
 
-        if (
-            answerLocked
-        ) {
+    if (
+        questions[questionIndex] !==
+        question
+    ) {
 
-            currentQuestion++;
+        return;
+    }
 
-            showQuestion();
 
-        }
+    /*
+       الانتقال للسؤال التالي.
+    */
 
+    if (
+        currentQuestion ===
+        questionIndex
+    ) {
+
+        currentQuestion++;
+
+        showQuestion();
     }
 
 }
@@ -2543,12 +2433,11 @@ function wait(ms) {
 
         }
     );
-
 }
 
 
 /* =====================================================
-   المفرقعات 🎉
+   المفرقعات
 ===================================================== */
 
 function createConfetti() {
@@ -2606,7 +2495,6 @@ function createConfetti() {
 
         }
 
-
         else {
 
             const colors = [
@@ -2628,7 +2516,6 @@ function createConfetti() {
                         * colors.length
                     )
                 ];
-
         }
 
 
@@ -2665,11 +2552,9 @@ function createConfetti() {
             },
 
             2200
-
         );
 
     }
-
 }
 
 
@@ -2763,7 +2648,6 @@ function showResult() {
         "resultText"
     ).innerHTML =
         resultText;
-
 }
 
 
@@ -2826,7 +2710,6 @@ function goToMenu() {
         "menu"
     ).style.display =
         "flex";
-
 }
 
 
@@ -2852,7 +2735,6 @@ function restartGame() {
     startMode(
         lastMode
     );
-
 }
 
 
