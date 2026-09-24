@@ -16,7 +16,6 @@ content="yes">
 
 <title>مسابقة الدول والعواصم</title>
 
-
 <style>
 
 * {
@@ -60,6 +59,11 @@ body {
     margin: auto;
 }
 
+
+/* =====================================================
+   العنوان
+===================================================== */
+
 h1 {
 
     text-align: center;
@@ -80,6 +84,11 @@ h1 {
 
     font-size: 16px;
 }
+
+
+/* =====================================================
+   القائمة
+===================================================== */
 
 .menu {
 
@@ -131,10 +140,20 @@ h1 {
     opacity: .85;
 }
 
+
+/* =====================================================
+   اللعبة
+===================================================== */
+
 .game {
 
     display: none;
 }
+
+
+/* =====================================================
+   الشريط العلوي
+===================================================== */
 
 .top-bar {
 
@@ -177,6 +196,11 @@ h1 {
 
     font-weight: bold;
 }
+
+
+/* =====================================================
+   صندوق السؤال
+===================================================== */
 
 .question-box {
 
@@ -245,6 +269,11 @@ h1 {
 
     color: #facc15;
 }
+
+
+/* =====================================================
+   الاختيارات
+===================================================== */
 
 .answers {
 
@@ -315,6 +344,11 @@ h1 {
     pointer-events: none;
 }
 
+
+/* =====================================================
+   التصحيح
+===================================================== */
+
 .correction {
 
     min-height: 75px;
@@ -350,6 +384,11 @@ h1 {
 
     margin-top: 5px;
 }
+
+
+/* =====================================================
+   أزرار التحكم
+===================================================== */
 
 .controls {
 
@@ -394,6 +433,11 @@ h1 {
     transform: scale(.96);
 }
 
+
+/* =====================================================
+   النتيجة
+===================================================== */
+
 .result {
 
     display: none;
@@ -415,7 +459,25 @@ h1 {
 
     font-size: 28px;
 
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   اسم القائمة في النتيجة
+===================================================== */
+
+.result-mode {
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    color: #cbd5e1;
+
+    margin-bottom: 18px;
+
+    line-height: 1.5;
 }
 
 .result-score {
@@ -473,6 +535,11 @@ h1 {
     cursor: pointer;
 }
 
+
+/* =====================================================
+   المفرقعات
+===================================================== */
+
 .confetti {
 
     position: fixed;
@@ -514,6 +581,11 @@ h1 {
         opacity: 0;
     }
 }
+
+
+/* =====================================================
+   الجوال
+===================================================== */
 
 @media (max-width: 500px) {
 
@@ -559,6 +631,11 @@ h1 {
         font-size: 45px;
     }
 
+    .result-mode {
+
+        font-size: 19px;
+    }
+
 }
 
 </style>
@@ -583,6 +660,10 @@ h1 {
 
 </div>
 
+
+<!-- =====================================================
+     القائمة الرئيسية
+===================================================== -->
 
 <div id="menu" class="menu">
 
@@ -634,6 +715,10 @@ onclick="startMode('capitalToCountry')">
 
 </div>
 
+
+<!-- =====================================================
+     اللعبة
+===================================================== -->
 
 <div id="game" class="game">
 
@@ -718,6 +803,10 @@ onclick="restartGame()">
 </div>
 
 
+<!-- =====================================================
+     النتيجة
+===================================================== -->
+
 <div
 id="result"
 class="result">
@@ -726,6 +815,14 @@ class="result">
 <h2>
 🎉 انتهت المسابقة
 </h2>
+
+
+<!-- اسم القائمة التي تم لعبها -->
+
+<div
+id="resultMode"
+class="result-mode">
+</div>
 
 
 <div
@@ -1384,6 +1481,47 @@ let speechSession = 0;
 
 
 /* =====================================================
+   أسماء القوائم
+===================================================== */
+
+function getModeName(mode) {
+
+    if (mode === "all") {
+
+        return "🌍 الجميع — 80 سؤال";
+
+    }
+
+    if (mode === "flagToCountry") {
+
+        return "🏳️ العلم → الدولة";
+
+    }
+
+    if (mode === "countryToFlag") {
+
+        return "🌍 الدولة → العلم";
+
+    }
+
+    if (mode === "countryToCapital") {
+
+        return "🏛️ الدولة → العاصمة";
+
+    }
+
+    if (mode === "capitalToCountry") {
+
+        return "🏛️ العاصمة → الدولة";
+
+    }
+
+    return "";
+
+}
+
+
+/* =====================================================
    خلط
 ===================================================== */
 
@@ -1520,11 +1658,6 @@ function speakArabic(text) {
 
             finished = true;
 
-            /*
-               نحل الـ Promise دائمًا حتى لا تتوقف
-               اللعبة إذا تم إلغاء النطق.
-            */
-
             resolve();
         }
 
@@ -1562,7 +1695,7 @@ function stopSpeech() {
 
 
 /* =====================================================
-   جملة النجاح
+   النجاح
 ===================================================== */
 
 async function speakSuccess() {
@@ -1576,7 +1709,7 @@ async function speakSuccess() {
 
 
 /* =====================================================
-   جملة الخطأ
+   الخطأ
 ===================================================== */
 
 async function speakError() {
@@ -1594,7 +1727,7 @@ async function speakError() {
 
 
 /* =====================================================
-   تحديد النص الصوتي للإجابة
+   النص الصوتي الصحيح
 ===================================================== */
 
 function getCorrectSpeech(
@@ -1608,6 +1741,7 @@ function getCorrectSpeech(
     ) {
 
         return item.speechCapital;
+
     }
 
     return item.speechCountry;
@@ -1633,12 +1767,14 @@ function makeOptions(
 
             value =
                 item.country;
+
         }
 
         else if (type === "capital") {
 
             value =
                 item.capital;
+
         }
 
         else {
@@ -1699,6 +1835,7 @@ function createQuestions(
                         item.country,
                         "country"
                     );
+
             }
 
             else if (
@@ -1711,6 +1848,7 @@ function createQuestions(
                         item.flag,
                         "flag"
                     );
+
             }
 
             else if (
@@ -1723,6 +1861,7 @@ function createQuestions(
                         item.capital,
                         "capital"
                     );
+
             }
 
             else if (
@@ -1735,6 +1874,7 @@ function createQuestions(
                         item.country,
                         "country"
                     );
+
             }
 
             return {
@@ -1797,6 +1937,7 @@ function startMode(mode) {
     ).style.display =
         "block";
 
+
     if (mode === "all") {
 
         questions = shuffle([
@@ -1827,6 +1968,7 @@ function startMode(mode) {
             createQuestions(
                 mode
             );
+
     }
 
     showQuestion();
@@ -1865,23 +2007,24 @@ function showQuestion() {
     const type =
         question.questionType;
 
-    const questionNumber =
-        document.getElementById(
-            "questionNumber"
-        );
 
-    questionNumber.innerHTML =
+    document.getElementById(
+        "questionNumber"
+    ).innerHTML =
         `السؤال <span>${currentQuestion + 1} / ${questions.length}</span>`;
+
 
     document.getElementById(
         "score"
     ).textContent =
         `النقاط: ${score}`;
 
+
     document.getElementById(
         "correction"
     ).innerHTML =
         "";
+
 
     const title =
         document.getElementById(
@@ -1897,6 +2040,7 @@ function showQuestion() {
         document.getElementById(
             "answers"
         );
+
 
     title.textContent =
         "";
@@ -1920,6 +2064,7 @@ function showQuestion() {
             `<div class="flag">
                 ${item.flag}
              </div>`;
+
     }
 
 
@@ -1935,6 +2080,7 @@ function showQuestion() {
             `<div class="question-country">
                 ${item.country}
              </div>`;
+
     }
 
 
@@ -1950,6 +2096,7 @@ function showQuestion() {
             `<div class="question-country">
                 ${item.country}
              </div>`;
+
     }
 
 
@@ -1965,12 +2112,9 @@ function showQuestion() {
             `<div class="question-capital">
                 ${item.capital}
              </div>`;
+
     }
 
-
-    /* =================================================
-       إنشاء الأزرار
-    ================================================= */
 
     question.options.forEach(
         option => {
@@ -1979,6 +2123,7 @@ function showQuestion() {
                 document.createElement(
                     "button"
                 );
+
 
             button.className =
                 "answer";
@@ -1992,13 +2137,12 @@ function showQuestion() {
                 button.classList.add(
                     "flag-answer"
                 );
+
             }
 
 
             /*
-               مهم جدًا:
-               نخزن القيمة الأصلية للزر.
-               التصحيح لن يعتمد على textContent.
+               القيمة الأصلية للزر
             */
 
             button.dataset.value =
@@ -2041,18 +2185,12 @@ async function chooseAnswer(
 
 
     /*
-       نثبت رقم السؤال لحظة الضغط.
-       هذا يمنع أي عملية صوت قديمة من التعامل
-       مع سؤال آخر.
+       تثبيت السؤال لحظة الضغط
     */
 
     const questionIndex =
         currentQuestion;
 
-
-    /*
-       نثبت كائن السؤال نفسه.
-    */
 
     const question =
         questions[
@@ -2064,10 +2202,6 @@ async function chooseAnswer(
         return;
 
 
-    /*
-       نثبت بيانات السؤال.
-    */
-
     const item =
         question.item;
 
@@ -2076,11 +2210,11 @@ async function chooseAnswer(
 
 
     /*
-       نثبت الإجابة الصحيحة الآن.
-       ولن نعيد حسابها من سؤال آخر لاحقًا.
+       تثبيت الإجابة الصحيحة
     */
 
     let correctValue;
+
 
     if (
         type ===
@@ -2089,6 +2223,7 @@ async function chooseAnswer(
 
         correctValue =
             item.country;
+
     }
 
     else if (
@@ -2098,6 +2233,7 @@ async function chooseAnswer(
 
         correctValue =
             item.flag;
+
     }
 
     else if (
@@ -2107,17 +2243,19 @@ async function chooseAnswer(
 
         correctValue =
             item.capital;
+
     }
 
     else {
 
         correctValue =
             item.country;
+
     }
 
 
     /*
-       نثبت النص الذي سينطق لاحقًا.
+       تثبيت الصوت
     */
 
     const correctSpeech =
@@ -2128,10 +2266,11 @@ async function chooseAnswer(
 
 
     /*
-       نثبت أيضًا الإجابة المعروضة.
+       تثبيت الإجابة المعروضة
     */
 
     let displayedAnswer;
+
 
     if (
         type ===
@@ -2140,6 +2279,7 @@ async function chooseAnswer(
 
         displayedAnswer =
             `${item.country} ${item.flag}`;
+
     }
 
     else if (
@@ -2149,6 +2289,7 @@ async function chooseAnswer(
 
         displayedAnswer =
             item.country;
+
     }
 
     else if (
@@ -2158,12 +2299,14 @@ async function chooseAnswer(
 
         displayedAnswer =
             item.capital;
+
     }
 
     else {
 
         displayedAnswer =
             item.country;
+
     }
 
 
@@ -2173,10 +2316,6 @@ async function chooseAnswer(
 
     stopSpeech();
 
-
-    /*
-       مقارنة الإجابة بالقيمة الأصلية.
-    */
 
     const isCorrect =
         selected ===
@@ -2189,10 +2328,6 @@ async function chooseAnswer(
         );
 
 
-    /*
-       تعطيل جميع الأزرار.
-    */
-
     buttons.forEach(
         button => {
 
@@ -2201,18 +2336,9 @@ async function chooseAnswer(
             );
 
 
-            /*
-               نستخدم dataset.value
-               وليس textContent.
-            */
-
             const buttonValue =
                 button.dataset.value;
 
-
-            /*
-               تلوين الإجابة الصحيحة.
-            */
 
             if (
                 buttonValue ===
@@ -2222,12 +2348,9 @@ async function chooseAnswer(
                 button.classList.add(
                     "correct"
                 );
+
             }
 
-
-            /*
-               تلوين إجابة المستخدم بالخطأ.
-            */
 
             if (
                 buttonValue ===
@@ -2238,6 +2361,7 @@ async function chooseAnswer(
                 button.classList.add(
                     "wrong"
                 );
+
             }
 
         }
@@ -2251,7 +2375,7 @@ async function chooseAnswer(
 
 
     /* =================================================
-       إجابة صحيحة
+       صحيح
     ================================================= */
 
     if (isCorrect) {
@@ -2270,18 +2394,8 @@ async function chooseAnswer(
         createConfetti();
 
 
-        /*
-           ننطق فقط:
-           أحسنت
-        */
-
         await speakSuccess();
 
-
-        /*
-           إذا تغيّر السؤال أثناء النطق
-           نتوقف ولا ننتقل بشكل خاطئ.
-        */
 
         if (
             questions[questionIndex] !==
@@ -2289,13 +2403,9 @@ async function chooseAnswer(
         ) {
 
             return;
+
         }
 
-
-        /*
-           إذا ما زلنا في نفس السؤال،
-           ننتقل للسؤال التالي.
-        */
 
         if (
             currentQuestion ===
@@ -2305,6 +2415,7 @@ async function chooseAnswer(
             currentQuestion++;
 
             showQuestion();
+
         }
 
 
@@ -2313,7 +2424,7 @@ async function chooseAnswer(
 
 
     /* =================================================
-       إجابة خاطئة
+       خطأ
     ================================================= */
 
     wrongAnswers++;
@@ -2325,25 +2436,11 @@ async function chooseAnswer(
          </div>`;
 
 
-    /*
-       خطأ
-       ثم 0.3 ثانية
-       ثم الإجابة هي
-    */
-
     await speakError();
 
 
-    /*
-       ثانية كاملة قبل نطق الإجابة.
-    */
-
     await wait(1000);
 
-
-    /*
-       نتأكد أن نفس السؤال ما زال موجودًا.
-    */
 
     if (
         questions[questionIndex] !==
@@ -2351,12 +2448,9 @@ async function chooseAnswer(
     ) {
 
         return;
+
     }
 
-
-    /*
-       نعرض الإجابة الصحيحة المثبتة.
-    */
 
     correction.innerHTML =
         `<div class="wrong-message">
@@ -2369,27 +2463,13 @@ async function chooseAnswer(
          </div>`;
 
 
-    /*
-       ننطق الإجابة الصحيحة المثبتة.
-    */
-
     await speakArabic(
         correctSpeech
     );
 
 
-    /*
-       ننتظر قليلًا بعد انتهاء النطق
-       حتى لا ينقطع آخر حرف.
-    */
-
     await wait(250);
 
-
-    /*
-       نتأكد مرة أخرى أن السؤال نفسه
-       ما زال هو السؤال الحالي.
-    */
 
     if (
         questions[questionIndex] !==
@@ -2397,12 +2477,9 @@ async function chooseAnswer(
     ) {
 
         return;
+
     }
 
-
-    /*
-       الانتقال للسؤال التالي.
-    */
 
     if (
         currentQuestion ===
@@ -2412,6 +2489,7 @@ async function chooseAnswer(
         currentQuestion++;
 
         showQuestion();
+
     }
 
 }
@@ -2516,6 +2594,7 @@ function createConfetti() {
                         * colors.length
                     )
                 ];
+
         }
 
 
@@ -2589,6 +2668,16 @@ function showResult() {
         );
 
 
+    /*
+       اسم القائمة التي لعبها المستخدم
+    */
+
+    document.getElementById(
+        "resultMode"
+    ).textContent =
+        getModeName(lastMode);
+
+
     document.getElementById(
         "resultScore"
     ).textContent =
@@ -2648,6 +2737,7 @@ function showResult() {
         "resultText"
     ).innerHTML =
         resultText;
+
 }
 
 
@@ -2710,6 +2800,7 @@ function goToMenu() {
         "menu"
     ).style.display =
         "flex";
+
 }
 
 
@@ -2735,6 +2826,7 @@ function restartGame() {
     startMode(
         lastMode
     );
+
 }
 
 
